@@ -8,21 +8,27 @@
             background: url('fondo.png') no-repeat center center fixed;
             background-size: contain;
             text-align: center;
-            color: #000000; /* Color del texto en tu página */
+            color: #4CC5B0; /* Color del texto en tu página */
             margin: 0; /* Elimina el margen predeterminado del cuerpo */
         }
 
         #header {
-            background-color: #000000;
+            background-color: #0CAFDC;
             color: #ffffff;
-            padding: 50px;
+            padding: 30px;
+
+        }
+        #header h1 {
+            font-family: 'Brush Script MT', cursive; font-size: 36px;
+        }
+
+        #header h4 {
+            font-family: 'Brush Script MT', cursive; font-size: 20px;
         }
 
         #content {
-            margin-top: 10px;
+            margin-top: 100px;
         }
-
-        /* Otros estilos que necesites */
     </style>
 </head>
 
