@@ -12,17 +12,17 @@
             <h3>Acceso</h3>
             <?php
             $alias = $_POST["alias"];
-            $pass = $_POST["passwrd"];
+            $pass = $_POST["password"];
 
             $conexion = mysqli_connect("localhost", "root", "", "games4all")or die("Fallo al hacer la consulta");
-            $consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE alias = '$alias' AND passwrd = '$pass'");
+            $consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE alias = '$alias' AND password = '$pass'");
 
             $nUsuarios = mysqli_num_rows($consulta);
 
             if ($nUsuarios > 0) {
                 for ($i = 0; $i < $nUsuarios; $i++) {
                     $fila = mysqli_fetch_array($consulta);
-                    if($fila['alias'] == $alias && $fila['passwrd'] == $pass){
+                    if($fila['alias'] == $alias && $fila['password'] == $pass){
                         ?><h4>¡Bienvenido <?php echo $alias; ?>, nos alegra verte de nuevo!</h4>
                         
                         <form method="post" action="menus.php">

@@ -44,7 +44,7 @@
             <input type="submit" name="Acceso" value="Acceso">
         </form>
         <br>
-        <form method="POST" action="añadir_usuario.php">
+        <form method="POST" action="registro_usuario.php">
             <input type="submit" name="Registro" value="Registro">
         </form>
     </div>

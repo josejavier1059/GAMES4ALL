@@ -10,10 +10,10 @@
     </head>
 
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: center; width: 100%;"> <!-- ZONA CENTRAL -->
+        <div style="float: center; width: 100%;">
             <h3>Perfil de <?php echo $alias ?></h3>
             <h6>Nombre de usuario: <?php echo $alias ?></h6>
-            <h6>Rol: <?php echo $rol ?></h6>
+            <h6>Rol: <?php echo $roles ?></h6>
             <h6>Contraseña: <?php echo $pass ?></h6>
             <h6>Email: <?php echo $email ?></h6>
             

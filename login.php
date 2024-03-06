@@ -13,7 +13,7 @@
         <form method="POST" action="check_login.php">
             <h3>Accede a tu cuenta</h3>
             <input type="text" name="alias" id="alias" placeholder="Nombre de usuario">
-            <input type="password" name="passwrd" id="passwrd" placeholder="Contraseña">
+            <input type="password" name="password" id="password" placeholder="Contraseña">
             <input type="submit" placeholder="Acceder" value="Acceder">
         </form>
         <br>
