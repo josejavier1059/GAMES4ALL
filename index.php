@@ -10,12 +10,17 @@
             text-align: center;
             color: #4CC5B0; /* Color del texto en tu página */
             margin: 0; /* Elimina el margen predeterminado del cuerpo */
+
         }
 
         #header {
-            background-color: #0CAFDC;
+            background-color: #173E59;
             color: #ffffff;
-            padding: 30px;
+            padding: 20px;
+            margin-top: -10px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-bottom: 100px;
 
         }
         #header h1 {
@@ -26,19 +31,18 @@
             font-family: 'Brush Script MT', cursive; font-size: 20px;
         }
 
-        #content {
-            margin-top: 100px;
-        }
+        
     </style>
 </head>
 
-<body>
+<body style="background-color: #4CC5B0; text-align: center; color: #000000;">
     <div id="header">
         <h1>GAMES4ALL</h1>
         <h4>¡Consigue tu juego preferido al mejor precio!</h4>
     </div>
 
-    <div id="content">
+    <div>
+        <h4>¡Bienvenido!</h4>
         <br>
         <form method="POST" action="login.php">
             <input type="submit" name="Acceso" value="Acceso">
