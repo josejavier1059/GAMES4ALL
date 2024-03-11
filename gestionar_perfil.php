@@ -60,10 +60,10 @@
             <h6>Email: <?php echo $email ?></h6>
             
             <form method="post" action="editar_usuario.php">
-                <input type="hidden" name="alias" value=<?php echo $alias ?>>
-                <input type="hidden" name="alias_target" value=<?php echo $alias ?>>
-                <input type="submit" value="Editar">
+            <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
+            <input type="submit" value="Editar">
             </form>
+
 
             <form method="post" action="borrar_usuario.php">
                 <input type="hidden" name="alias" value=<?php echo $alias ?>>
