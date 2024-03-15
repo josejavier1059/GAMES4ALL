@@ -38,18 +38,22 @@
     </head>
 
     <?php
-            $alias = $_POST["alias"];
+            $alias = $_COOKIE['alias'];
 
             $conexion = mysqli_connect("localhost", "root", "", "games4all")or die("Fallo al hacer la consulta.");
             $consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE alias = '$alias'");
 
-            $linea = mysqli_fetch_array($consulta);
+            $linea = mysqli_fetch_array($consulta);           
             $id = $linea["id_usuario"];
             $roles = $linea["rol"];
             $alias = $linea["alias"];
             $pass = $linea["password"];
             $email = $linea["correo"];
 
+            setcookie("id", $id, 0, "/");
+            setcookie("rol", $roles, 0, "/");
+            setcookie("correo", $email, 0, "/");
+        
         ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
         <div style="float: left; width: 20%; height: 350px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
@@ -58,31 +62,26 @@
                 echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL ADMINISTRADOR
     ?>          
                 <form method="post" action="gestionar_perfil.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar perfil">
                 </form>
                 
 
                 <form method="post" action="gestionar_usuarios.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar usuarios">
                 </form>
             
 
                 <form method="post" action="gestionar_videojuegos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar videojuegos">
                 </form>
                 
                 
                 <form method="post" action="gestionar_pedidos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar pedidos">
                 </form>
                 
 
                 <form method="post" action="gestionar_descuentos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar descuentos">
                 </form>
                 
@@ -97,37 +96,31 @@
                 echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL USUARIO
     ?>          
                 <form method="post" action="buscar_juegos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Buscar videojuegos">
                 </form>
                 
 
                 <form method="post" action="hacer_pedido.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Hacer pedido">
                 </form>
                 
 
                 <form method="post" action="gestionar_pedidos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar pedidos">
                 </form>
                 
 
                 <form method="post" action="biblioteca_juegos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Mi biblioteca de juegos">
                 </form>
             
 
                 <form method="post" action="gestionar_perfil.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar perfil">
                 </form>
                 
 
                 <form method="post" action="gestionar_descuentos.php">
-                    <input type="hidden" name="alias" value=<?php echo $alias ?>>
                     <input type="submit" value="Gestionar descuentos">
                 </form>
                 
@@ -135,6 +128,7 @@
                 <form method="post" action="index.php">
                     <input type="submit" value="Cerrar sesión">
                 </form>
+
                 
         <?php
             }

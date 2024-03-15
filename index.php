@@ -5,7 +5,7 @@
     <title>G4A</title>
     <style>
         body {
-            background: url('fondo.png') no-repeat center center fixed;
+            background: url('fondo1.png') no-repeat center center fixed;
             background-size: contain;
             text-align: center;
             color: #4CC5B0; /* Color del texto en tu página */
