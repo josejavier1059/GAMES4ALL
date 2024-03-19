@@ -1,0 +1,27 @@
+body {
+    background: url('fondo.png') no-repeat center center fixed;
+    background-size: contain;
+    text-align: center;
+    color: #4CC5B0;
+    margin: 0;
+}
+
+#header {
+    background-color: #173E59;
+    color: #ffffff;
+    padding: 20px;
+    margin-top: -10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 100px;
+}
+
+#header h1 {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 36px;
+}
+
+#header h4 {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 20px;
+}
