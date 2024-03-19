@@ -55,9 +55,10 @@
                         setcookie("alias", $alias, 0, "/");
                         setcookie("password", $pass, 0, "/");
                         ?><h4>¡Bienvenido <?php echo $alias; ?>, nos alegra verte de nuevo!</h4>
-                    
+                        <br>
+                        <h4>Serás redirigido automaticamente</h4>
                 <?php
-                        header('Location: menus.php');
+                        header("refresh:3;url=menus.php");
                     }
                 }
             }

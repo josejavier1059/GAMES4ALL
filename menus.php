@@ -87,6 +87,7 @@
                 
 
                 <form method="post" action="index.php">
+                    <input type="hidden" name="logout" value="true">
                     <input type="submit" value="Cerrar sesión">
                 </form>
                  
@@ -124,12 +125,7 @@
                     <input type="submit" value="Gestionar descuentos">
                 </form>
                 
-
-                <form method="post" action="index.php">
-                    <input type="submit" value="Cerrar sesión">
-                </form>
-
-                
+   
         <?php
             }
         ?>
