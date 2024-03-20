@@ -8,7 +8,7 @@
             background: url('fondo.png') no-repeat center center fixed;
             background-size: contain;
             text-align: center;
-            color: #000000; /* Cambiado a negro */
+            color: #000000; 
             margin: 0;
         }
 
@@ -24,9 +24,9 @@
             margin: auto;
             width: 80%;
             border-collapse: collapse;
-            background-color: #ffffff; /* Fondo blanco */
-            opacity: 0.95; /* Ligeramente opaco para ver el fondo, pero asegurar legibilidad */
-            box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); /* Opcional: sombra para darle profundidad */
+            background-color: #ffffff;
+            opacity: 0.95; 
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); 
         }
 
         th, td {
