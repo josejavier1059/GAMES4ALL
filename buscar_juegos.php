@@ -73,24 +73,25 @@
 
     <form action="buscar_juegos.php" method="post">
         <input type="text" name="filtro" placeholder="Buscar por plataforma, título...">
+        <input type="text" name="genero" placeholder="Buscar por género...">
         <input type="submit" value="Buscar">
     </form>
 
     <?php
-    // Conexión a la base de datos
     $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
 
     $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : '';
+    $genero = isset($_POST['genero']) ? $_POST['genero'] : '';
 
-    $consultaSQL = "SELECT * FROM juegos WHERE plataforma LIKE '%$filtro%' OR titulo LIKE '%$filtro%' OR tipo LIKE '%$filtro%'";
+    $consultaSQL = "SELECT juegos.id_juego, juegos.plataforma, juegos.titulo, juegos.precio, juegos.rebaja, juegos.stock, tipo.genero, tipo.descripcion, ROUND(juegos.precio - juegos.precio * juegos.rebaja / 100, 2) AS precio_rebajado FROM juegos INNER JOIN tipo ON juegos.tipo = tipo.id_tipo WHERE (juegos.plataforma LIKE '%$filtro%' OR juegos.titulo LIKE '%$filtro%') AND tipo.genero LIKE '%$genero%'";
 
     $resultado = mysqli_query($conexion, $consultaSQL);
 
     if(mysqli_num_rows($resultado) > 0) {
         echo "<table>";
-        echo "<tr><th>ID</th><th>Plataforma</th><th>Título</th><th>Precio</th><th>Rebaja</th><th>Stock</th><th>Tipo</th></tr>";
+        echo "<tr><th>ID</th><th>Plataforma</th><th>Título</th><th>Precio</th><th>Precio Rebajado</th><th>Rebaja</th><th>Stock</th><th>Género</th></tr>";
         while($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr><td>".$fila['id_juego']."</td><td>".$fila['plataforma']."</td><td>".$fila['titulo']."</td><td>".$fila['precio']."</td><td>".$fila['rebaja']."</td><td>".$fila['stock']."</td><td>".$fila['tipo']."</td></tr>";
+            echo "<tr><td>".$fila['id_juego']."</td><td>".$fila['plataforma']."</td><td>".$fila['titulo']."</td><td>".$fila['precio']."</td><td>".$fila['precio_rebajado']."</td><td>".$fila['rebaja']."</td><td>".$fila['stock']."</td><td>".$fila['genero']."</td></tr>";
         }
         echo "</table>";
     } else {
