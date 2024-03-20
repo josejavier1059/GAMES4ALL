@@ -1,6 +1,32 @@
 <?php
 $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
 
+// Verificar si el usuario está logueado mediante la cookie 'alias'
+if (!isset($_COOKIE['alias'])) {
+    header('Location: index.php'); // Redirige al usuario a la página de inicio si no está logueado
+    exit();
+}
+
+$alias = $_COOKIE['alias'];
+
+// Preparar y ejecutar la consulta para verificar el rol del usuario
+$consulta = $conexion->prepare("SELECT rol FROM usuario WHERE alias = ?");
+$consulta->bind_param("s", $alias);
+$consulta->execute();
+$resultado = $consulta->get_result();
+
+// Si no se encuentra el usuario o el rol no es administrador, redirigir
+if ($resultado->num_rows === 0) {
+    header('Location: index.php'); // Usuario no encontrado
+    exit();
+}
+
+$fila = $resultado->fetch_assoc();
+if ($fila['rol'] !== 'Administrador') {
+    header('Location: index.php'); // No es administrador
+    exit();
+}
+
 $plataforma = $_POST['plataforma'];
 $titulo = $_POST['titulo'];
 $precio = $_POST['precio'];

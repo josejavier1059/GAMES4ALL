@@ -84,7 +84,7 @@ if ($fila['rol'] !== 'Administrador') {
             margin: 20px auto;
             width: 80%;
             border-collapse: collapse;
-            background-color: #ffffff; 
+            background-color: #ffffff;
         }
 
         th, td {
@@ -101,51 +101,35 @@ if ($fila['rol'] !== 'Administrador') {
 </head>
 <body>
 
-<div id="header">
-    <h1>GAMES4ALL</h1>
-    <h4>Introduce un nuevo juego o revisa los tipos existentes</h4>
-</div>
-
-<h2>Tipos de Juegos Existentes</h2>
+<h2>Juegos Existentes</h2>
 <table>
     <thead>
         <tr>
             <th>ID</th>
+            <th>Plataforma</th>
             <th>Título</th>
-            <th>Género</th>
-            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         <?php
-        $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar con la base de datos.");
-        $consulta = "SELECT * FROM tipo";
+        $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
+        $consulta = "SELECT id_juego, plataforma, titulo, precio FROM juegos";
         $resultado = mysqli_query($conexion, $consulta);
 
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
-            echo "<td>".$fila['id_tipo']."</td>";
+            echo "<td>".$fila['id_juego']."</td>";
+            echo "<td>".$fila['plataforma']."</td>";
             echo "<td>".$fila['titulo']."</td>";
-            echo "<td>".$fila['genero']."</td>";
-            echo "<td>".$fila['descripcion']."</td>";
+            echo "<td>".$fila['precio']."</td>";
+            echo "<td><a href='modificar_juego.php?id=".$fila['id_juego']."'>Modificar</a> | <a href='eliminar_juego.php?id=".$fila['id_juego']."'>Eliminar</a></td>";
             echo "</tr>";
         }
         ?>
     </tbody>
 </table>
-
-<h2>Introducir Nuevo Juego</h2>
-<form action="procesar_introduce_juego.php" method="post">
-    <input type="text" name="plataforma" required placeholder="Plataforma (ej. PC, PlayStation)">
-    <input type="text" name="titulo" required placeholder="Título del juego">
-    <input type="number" step="0.01" name="precio" required placeholder="Precio">
-    <input type="number" step="0.01" name="rebaja" required placeholder="Rebaja">
-    <input type="number" name="stock" required placeholder="Stock">
-    <input type="number" name="id_tipo" placeholder="ID Tipo (si ya existe)">
-    <input type="text" name="genero" placeholder="Género (solo si ID Tipo no se proporciona)">
-    <textarea name="descripcion" placeholder="Descripción (solo si ID Tipo no se proporciona)"></textarea>
-    <input type="submit" value="Introducir Juego">
-</form>
 
 </body>
 </html>
