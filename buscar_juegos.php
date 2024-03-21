@@ -65,7 +65,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: #4CC5B0; color: #000000;">
     <div id="header">
         <h1>GAMES4ALL</h1>
         <h4>¡Encuentra tu próximo juego favorito!</h4>
@@ -83,15 +83,31 @@
     $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : '';
     $genero = isset($_POST['genero']) ? $_POST['genero'] : '';
 
-    $consultaSQL = "SELECT juegos.id_juego, juegos.plataforma, juegos.titulo, juegos.precio, juegos.rebaja, juegos.stock, tipo.genero, tipo.descripcion, ROUND(juegos.precio - juegos.precio * juegos.rebaja / 100, 2) AS precio_rebajado FROM juegos INNER JOIN tipo ON juegos.tipo = tipo.id_tipo WHERE (juegos.plataforma LIKE '%$filtro%' OR juegos.titulo LIKE '%$filtro%') AND tipo.genero LIKE '%$genero%'";
+    $consultaSQL = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.stock, juego.tipo, info_juego.genero, info_juego.descripcion, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio_rebajado FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego WHERE (juego.plataforma LIKE '%$filtro%' OR juego.titulo LIKE '%$filtro%') AND info_juego.genero LIKE '%$genero%'";
 
     $resultado = mysqli_query($conexion, $consultaSQL);
 
     if(mysqli_num_rows($resultado) > 0) {
         echo "<table>";
-        echo "<tr><th>ID</th><th>Plataforma</th><th>Título</th><th>Precio</th><th>Precio Rebajado</th><th>Rebaja</th><th>Stock</th><th>Género</th></tr>";
+        echo "<tr>
+            <th>Plataforma</th>
+            <th>Título</th>
+            <th>Género</th>
+            <th>Precio</th>
+            <th>Rebaja</th>
+            <th>Unidades</th>
+            <th>Formato</th>
+        </tr>";
         while($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr><td>".$fila['id_juego']."</td><td>".$fila['plataforma']."</td><td>".$fila['titulo']."</td><td>".$fila['precio']."</td><td>".$fila['precio_rebajado']."</td><td>".$fila['rebaja']."</td><td>".$fila['stock']."</td><td>".$fila['genero']."</td></tr>";
+            echo "<tr>
+                <td>".$fila['plataforma']."</td>
+                <td>".$fila['titulo']."</td>
+                <td>".$fila['genero']."</td>
+                <td>".$fila['precio_rebajado']."€</td>
+                <td>".$fila['rebaja']."%</td>
+                <td>".$fila['stock']."</td>
+                <td>";echo $fila['tipo'] == 0 ? "Físico" : "Digital";"</td>
+            </tr>";
         }
         echo "</table>";
     } else {

@@ -2,7 +2,7 @@
 $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
 
 
-if (!isset($_COOKIE['alias'])) {
+/*if (!isset($_COOKIE['alias'])) {
     header('Location: index.php');
     exit();
 }
@@ -25,7 +25,7 @@ $fila = $resultado->fetch_assoc();
 if ($fila['rol'] !== 'Administrador') {
     header('Location: index.php'); // No es administrador
     exit();
-}
+}*/
 ?>
 
 
@@ -103,7 +103,7 @@ if ($fila['rol'] !== 'Administrador') {
 
 <h2>Juegos Existentes</h2>
 <table>
-    <thead>
+    <head>
         <tr>
             <th>ID</th>
             <th>Plataforma</th>
@@ -111,13 +111,12 @@ if ($fila['rol'] !== 'Administrador') {
             <th>Precio</th>
             <th>Acciones</th>
         </tr>
-    </thead>
-    <tbody>
+    </head>
+    <body style="background-color: #4CC5B0; color: #000000;">
         <?php
         $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
-        $consulta = "SELECT id_juego, plataforma, titulo, precio FROM juegos";
+        $consulta = "SELECT id_juego, plataforma, titulo, precio FROM juego";
         $resultado = mysqli_query($conexion, $consulta);
-
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             echo "<td>".$fila['id_juego']."</td>";
@@ -128,7 +127,7 @@ if ($fila['rol'] !== 'Administrador') {
             echo "</tr>";
         }
         ?>
-    </tbody>
+    </body>
 </table>
 
 </body>
