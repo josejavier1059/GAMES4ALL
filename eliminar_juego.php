@@ -10,27 +10,24 @@ if (!isset($_COOKIE['alias'])) {
 
 $alias = $_COOKIE['alias'];
 
-// Preparar y ejecutar la consulta
 $consulta = $conexion->prepare("SELECT rol FROM usuario WHERE alias = ?");
 $consulta->bind_param("s", $alias);
 $consulta->execute();
 $resultado = $consulta->get_result();
 
-// Si no se encuentra el usuario o el rol no es administrador, redirigir
 if ($resultado->num_rows === 0) {
-    header('Location: index.php'); // Usuario no encontrado
+    header('Location: index.php');
     exit();
 }
 
 $fila = $resultado->fetch_assoc();
-if ($fila['rol'] !== 'Administrador') {
-    header('Location: index.php'); // No es administrador
+if ($fila['rol'] !== 'administrador') {
+    header('Location: index.php');
     exit();
 }
 
 
 if (!isset($_GET['id'])) {
-    // Si no se proporciona un ID, redirigir de vuelta a la lista de juegos
     header('Location: ver_eliminar_juegos.php');
     exit();
 }
@@ -38,8 +35,25 @@ if (!isset($_GET['id'])) {
 $id_juego = $_GET['id'];
 $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
 
-// Eliminar el juego seleccionado
-$eliminar = "DELETE FROM juegos WHERE id_juego = '$id_juego'";
+//Antes de eliminar el juego mirar si existe alguna otra version del juego, si no existe eliminar la info del juego
+$consulta = "SELECT * FROM juego WHERE id_juego = '$id_juego'";
+$resultado = mysqli_query($conexion, $consulta);
+$juego = mysqli_fetch_assoc($resultado);
+
+$titulo = $juego['titulo'];
+
+$consulta = "SELECT * FROM juego WHERE titulo = '$titulo'";
+$resultado = mysqli_query($conexion, $consulta);
+
+if (mysqli_num_rows($resultado) == 1) {
+    $eliminarInfo = "DELETE FROM info_juego WHERE titulo_juego = '$titulo'";
+    if (!mysqli_query($conexion, $eliminarInfo)) {
+        header('Location: ver_eliminar_juegos.php?error=errorAlEliminarInfo');
+        exit();
+    }
+}
+
+$eliminar = "DELETE FROM juego WHERE id_juego = '$id_juego'";
 $resultado = mysqli_query($conexion, $eliminar);
 
 if ($resultado) {
@@ -48,7 +62,6 @@ if ($resultado) {
     echo "Error al eliminar el juego.";
 }
 
-// Redirigir de vuelta a la lista de juegos
 header('Location: ver_eliminar_juegos.php');
 
 ?>

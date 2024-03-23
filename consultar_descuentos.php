@@ -5,13 +5,12 @@
         die("Error de conexión: " . $conexion->connect_error);
     }
     
-    /*if (!isset($_COOKIE['alias'])) {
+    if (!isset($_COOKIE['alias'])) {
         header('Location: index.php');
         exit();
     }
 
-    $alias = $_COOKIE['alias'];*/
-    $alias = 'Manuhima';
+    $alias = $_COOKIE['alias'];
 ?>
 
 <!DOCTYPE html>

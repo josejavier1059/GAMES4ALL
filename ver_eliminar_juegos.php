@@ -1,33 +1,29 @@
 <?php
 $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
 
-
-/*if (!isset($_COOKIE['alias'])) {
+if (!isset($_COOKIE['alias'])) {
     header('Location: index.php');
     exit();
 }
 
 $alias = $_COOKIE['alias'];
 
-// Preparar y ejecutar la consulta
 $consulta = $conexion->prepare("SELECT rol FROM usuario WHERE alias = ?");
 $consulta->bind_param("s", $alias);
 $consulta->execute();
 $resultado = $consulta->get_result();
 
-// Si no se encuentra el usuario o el rol no es administrador, redirigir
 if ($resultado->num_rows === 0) {
-    header('Location: index.php'); // Usuario no encontrado
+    header('Location: index.php');
     exit();
 }
 
 $fila = $resultado->fetch_assoc();
-if ($fila['rol'] !== 'Administrador') {
-    header('Location: index.php'); // No es administrador
+if ($fila['rol'] !== 'administrador') {
+    header('Location: index.php');
     exit();
-}*/
+}
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -109,20 +105,26 @@ if ($fila['rol'] !== 'Administrador') {
             <th>Plataforma</th>
             <th>Título</th>
             <th>Precio</th>
+            <th>Rebaja</th>
+            <th>Stock</th>
+            <th>Formato</th>
             <th>Acciones</th>
         </tr>
     </head>
     <body style="background-color: #4CC5B0; color: #000000;">
         <?php
         $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
-        $consulta = "SELECT id_juego, plataforma, titulo, precio FROM juego";
+        $consulta = "SELECT id_juego, plataforma, titulo, precio, rebaja, stock, formato FROM juego";
         $resultado = mysqli_query($conexion, $consulta);
         while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr>";
-            echo "<td>".$fila['id_juego']."</td>";
-            echo "<td>".$fila['plataforma']."</td>";
-            echo "<td>".$fila['titulo']."</td>";
-            echo "<td>".$fila['precio']."</td>";
+            echo "<tr>
+            <td>".$fila['id_juego']."</td>
+            <td>".$fila['plataforma']."</td>
+            <td>".$fila['titulo']."</td>
+            <td>".$fila['precio']."€</td>
+            <td>".$fila['rebaja']."%</td>
+            <td>".$fila['stock']."</td>
+            <td>";echo $fila['formato'] == 0 ? "Físico" : "Digital";"</td>";
             echo "<td><a href='modificar_juego.php?id=".$fila['id_juego']."'>Modificar</a> | <a href='eliminar_juego.php?id=".$fila['id_juego']."'>Eliminar</a></td>";
             echo "</tr>";
         }

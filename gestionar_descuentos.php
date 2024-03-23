@@ -16,7 +16,7 @@
     $consultaRol->execute();
     $resultadoRol = $consultaRol->get_result();
 
-    if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'Administrador') {
+    if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'administrador') {
         header('Location: index.php');
         exit();
     }
@@ -44,7 +44,11 @@
     </head>
     <body style="background-color: #4CC5B0; color: #000000;">
     <div style="text-align: center; margin-right: 50%;">
-        <a href="menus.php">Volver</a>
+        <div>
+            <form method="POST" action="menus.php">
+                <input type="submit" value="Volver">
+            </form>
+        </div>
         <h1>Gestor de Descuentos</h1>
         <a href="añadir_descuento.php" style="display: inline-block; margin-bottom: 10px; padding: 5px 10px; background-color: #173E59; color: #ffffff; text-decoration: none; border-radius: 5px;">Añadir Descuento</a>
     </div>
