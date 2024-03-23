@@ -69,6 +69,13 @@
     <div id="header">
         <h1>GAMES4ALL</h1>
         <h4>¡Encuentra tu próximo juego favorito!</h4>
+        
+    </div>
+    
+    <div>
+        <form method="POST" action="menus.php">
+            <input type="submit" value="Volver">
+        </form>
     </div>
 
     <form action="buscar_juegos.php" method="post">
@@ -83,12 +90,12 @@
     $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : '';
     $genero = isset($_POST['genero']) ? $_POST['genero'] : '';
 
-    $consultaSQL = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.stock, juego.tipo, info_juego.genero, info_juego.descripcion, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio_rebajado FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego WHERE (juego.plataforma LIKE '%$filtro%' OR juego.titulo LIKE '%$filtro%') AND info_juego.genero LIKE '%$genero%'";
+    $consultaSQL = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.stock, juego.formato, info_juego.genero, info_juego.descripcion, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio_rebajado FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego WHERE (juego.plataforma LIKE '%$filtro%' OR juego.titulo LIKE '%$filtro%') AND info_juego.genero LIKE '%$genero%'";
 
     $resultado = mysqli_query($conexion, $consultaSQL);
-
+    echo "<div style='overflow-y:auto; height: 300px; background-color: #ffffff; opacity: 0.95; box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); padding: 0; margin: 0;'>";
     if(mysqli_num_rows($resultado) > 0) {
-        echo "<table>";
+        echo "<table style='width:100%; border-collapse: collapse;'>";
         echo "<tr>
             <th>Plataforma</th>
             <th>Título</th>
@@ -106,10 +113,10 @@
                 <td>".$fila['precio_rebajado']."€</td>
                 <td>".$fila['rebaja']."%</td>
                 <td>".$fila['stock']."</td>
-                <td>";echo $fila['tipo'] == 0 ? "Físico" : "Digital";"</td>
+                <td>";echo $fila['formato'] == 0 ? "Físico" : "Digital";"</td>
             </tr>";
         }
-        echo "</table>";
+        echo "</table></div>";
     } else {
         echo "No se encontraron juegos que coincidan con la búsqueda.";
     }

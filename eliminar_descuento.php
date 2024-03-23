@@ -17,7 +17,7 @@
         $consultaRol->execute();
         $resultadoRol = $consultaRol->get_result();
 
-        if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'Administrador') {
+        if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'administrador') {
             header('Location: index.php');
             exit();
         }

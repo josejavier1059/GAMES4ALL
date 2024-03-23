@@ -1,9 +1,8 @@
 <?php
 $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
 
-// Verificar si el usuario es administrador
 if (!isset($_COOKIE['alias'])) {
-    header('Location: index.php'); // Redirigir si la cookie de alias no está presente
+    header('Location: index.php');
     exit();
 }
 
@@ -13,36 +12,35 @@ $consultaRol->bind_param("s", $alias);
 $consultaRol->execute();
 $resultadoRol = $consultaRol->get_result();
 
-if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'Administrador') {
-    header('Location: index.php'); // Redirigir si no es administrador
+if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'administrador') {
+    header('Location: index.php');
     exit();
 }
 
-// Procesar el formulario cuando se envía
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_juego'])) {
     $id_juego = $_POST['id_juego'];
-    $plataforma = $_POST['plataforma'];
-    $titulo = $_POST['titulo'];
     $precio = $_POST['precio'];
     $rebaja = $_POST['rebaja'];
     $stock = $_POST['stock'];
-    $id_tipo = $_POST['id_tipo']; // ID del tipo seleccionado en el formulario
+    $genero = $_POST['genero'];
+    $descripcion = $_POST['descripcion'];
 
-    // Actualizar juego
-    $stmtJuego = $conexion->prepare("UPDATE juegos SET plataforma=?, titulo=?, precio=?, rebaja=?, stock=?, tipo=? WHERE id_juego=?");
-    $stmtJuego->bind_param("ssddiii", $plataforma, $titulo, $precio, $rebaja, $stock, $id_tipo, $id_juego);
+    $stmtJuego = $conexion->prepare("UPDATE juego SET precio=?, rebaja=?, stock=? WHERE id_juego=?");
+    $stmtJuego->bind_param("diii", $precio, $rebaja, $stock, $id_juego);
     $stmtJuego->execute();
+
+    $stmtInfoJuego = $conexion->prepare("UPDATE info_juego SET genero=?, descripcion=? WHERE titulo_juego=(SELECT titulo FROM juego WHERE id_juego=?)");
+    $stmtInfoJuego->bind_param("ssi", $genero, $descripcion, $id_juego);
+    $stmtInfoJuego->execute();
 
     header("Location: ver_eliminar_juegos.php?mensaje=juegoModificado");
     exit();
 }
 
-// Mostrar el formulario para un juego existente si se accede a través de GET con un ID de juego
 if (isset($_GET['id'])) {
     $id_juego = $_GET['id'];
 
-    // Obtener los detalles del juego para prellenar el formulario
-    $stmtJuego = $conexion->prepare("SELECT * FROM juegos WHERE id_juego = ?");
+    $stmtJuego = $conexion->prepare("SELECT info_juego.*, juego.* FROM info_juego JOIN juego ON info_juego.titulo_juego = juego.titulo WHERE id_juego = ?");
     $stmtJuego->bind_param("i", $id_juego);
     $stmtJuego->execute();
     $resultadoJuego = $stmtJuego->get_result();
@@ -116,9 +114,23 @@ if (isset($_GET['id'])) {
             background-color: #4CAF50;
             color: white;
         }
+
+        .form-group {
+            margin-bottom: 100px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group textarea {
+            width: 200%; /* O ajusta el ancho según tu diseño */
+            height: 200px; /* O ajusta la altura según tu diseño */
+        }
     </style>
 </head>
-<body>
+<body style="background-color: #4CC5B0; color: #000000;">
 
 <h2>Modificar Juego</h2>
 
@@ -126,25 +138,20 @@ if (isset($_GET['id'])) {
     <input type="hidden" name="id_juego" value="<?php echo htmlspecialchars($juego['id_juego']); ?>">
     <p>Plataforma: <?php echo htmlspecialchars($juego['plataforma']); ?></p>
     <p>Título: <?php echo htmlspecialchars($juego['titulo']); ?></p>
+    <p>Formato: <?php echo $juego['formato'] == 0 ? "Físico" : "Digital"; ?></p>
     <label for="precio">Precio:</label>
     <input type="number" step="0.01" name="precio" required value="<?php echo htmlspecialchars($juego['precio']); ?>">
     <label for="rebaja">Rebaja:</label>
-    <input type="number" step="0.01" name="rebaja" required value="<?php echo htmlspecialchars($juego['rebaja']); ?>">
+    <input type="number" min="0" max="100" step="1" name="rebaja" required value="<?php echo htmlspecialchars($juego['rebaja']); ?>">
     <label for="stock">Stock:</label>
     <input type="number" name="stock" required value="<?php echo htmlspecialchars($juego['stock']); ?>">
-    <label for="id_tipo">Tipo:</label>
-    <select name="id_tipo" required>
-        <?php
-        $consultaTipos = $conexion->prepare("SELECT id_tipo, titulo FROM tipo");
-        $consultaTipos->execute();
-        $resultadoTipos = $consultaTipos->get_result();
-
-        while ($tipo = $resultadoTipos->fetch_assoc()) {
-            $selected = $juego['tipo'] == $tipo['id_tipo'] ? 'selected' : '';
-            echo "<option value=\"{$tipo['id_tipo']}\" $selected>{$tipo['titulo']}</option>";
-        }
-        ?>
-    </select>
+    <label for="stock">Género:</label>
+    <input type="text" name="genero" required value="<?php echo htmlspecialchars($juego['genero']); ?>">
+    <br>
+    <div>
+        <label for="stock">Descripción:</label>
+        <textarea name="descripcion" required><?php echo htmlspecialchars($juego['descripcion']); ?></textarea>
+    </div>
     <input type="submit" value="Modificar Juego">
 </form>
 
