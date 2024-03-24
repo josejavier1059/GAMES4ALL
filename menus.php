@@ -58,6 +58,7 @@
                     <input type="submit" value="Gestionar descuentos">
                 </form>
                 
+              
 
                 <form method="post" action="index.php">
                     <input type="hidden" name="logout" value="true">
