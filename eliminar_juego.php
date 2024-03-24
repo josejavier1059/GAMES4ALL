@@ -9,23 +9,12 @@ if (!isset($_COOKIE['alias'])) {
 }
 
 $alias = $_COOKIE['alias'];
+$rol = $_COOKIE['rol'];
 
-$consulta = $conexion->prepare("SELECT rol FROM usuario WHERE alias = ?");
-$consulta->bind_param("s", $alias);
-$consulta->execute();
-$resultado = $consulta->get_result();
-
-if ($resultado->num_rows === 0) {
+if ($rol !== 'administrador') {
     header('Location: index.php');
     exit();
 }
-
-$fila = $resultado->fetch_assoc();
-if ($fila['rol'] !== 'administrador') {
-    header('Location: index.php');
-    exit();
-}
-
 
 if (!isset($_GET['id'])) {
     header('Location: ver_eliminar_juegos.php');

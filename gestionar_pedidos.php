@@ -46,8 +46,7 @@
                 <input type="submit" value="Volver">
             </form>
         </div>
-        <h1>Gestor de Descuentos</h1>
-        <a href="añadir_descuento.php" style="display: inline-block; margin-bottom: 10px; padding: 5px 10px; background-color: #173E59; color: #ffffff; text-decoration: none; border-radius: 5px;">Añadir Descuento</a>
+        <h1>Gestor de Pedidos</h1>
     </div>
 
     <div style="overflow-y:auto; height: 300px; display: inline-block; background-color: #ffffff; opacity: 0.95; box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); ">
@@ -55,23 +54,29 @@
             <tr>
                 <th>ID</th>
                 <th>USUARIO</th>
+                <th>TARJETA</th>
                 <th>DESCUENTO</th>
+                <th>SUBTOTAL</th>
+                <th>TOTAL</th>
                 <th>GESTIÓN</th>
             </tr>
 
             <?php 
-            $sql = "SELECT d.id_descuento, d.id_usuario, d.valor, u.alias FROM descuento d
-                    INNER JOIN usuario u ON d.id_usuario = u.id_usuario";
+            $sql = "SELECT p.id_pedido, u.alias, t.numero, IFNULL(p.descuento, 0) as descuento, p.subtotal FROM pedido p JOIN usuario u ON p.id_usuario = u.id_usuario JOIN tarjeta t ON p.id_tarjeta = t.id_tarjeta";
             $resultado = $conexion->query($sql);
 
             while ($fila = $resultado->fetch_assoc()) {
                 echo "<tr>
-                        <td style='min-width: 40px;'>".$fila['id_descuento']."</td>
+                        <td style='min-width: 40px;'>".$fila['id_pedido']."</td>
                         <td>".$fila['alias']."</td>
-                        <td>".$fila['valor']."%</td>
+                        <td>".$fila['numero']."</td>
+                        <td>".$fila['descuento']."%</td>
+                        <td>".$fila['subtotal']."€</td>
+                        <td>".($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)))."€</td>
                         <td>
-                            <a href='eliminar_descuento.php?id=".$fila['id_descuento']."'>Eliminar</a> |
-                            <a href='modificar_descuento.php?id=".$fila['id_descuento']."'>Modificar</a>
+                            <a href='eliminar_pedido.php?id=".$fila['id_pedido']."'>Eliminar</a> | 
+                            <a href='modificar_pedido.php?id=".$fila['id_pedido']."'>Modificar</a> | 
+                            <a href='detalles_pedido.php?id=".$fila['id_pedido']."'>Detalles</a>
                         </td>
                     </tr>";
             }

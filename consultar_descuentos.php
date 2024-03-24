@@ -34,12 +34,14 @@
     </div>
     </head>
     <body style="background-color: #4CC5B0; color: #000000;">
-    <div style="text-align: center; margin-right: 50%;">
-        <a href="menus.php">Volver</a>
+    <div style="text-align: center;">
+            <form method="POST" action="menus.php">
+                <input type="submit" value="Volver">
+            </form>
         <h1>Tus Descuentos</h1>
     </div>
 
-    <div style="overflow-y:auto; height: 200px; margin-right: 50%; display: inline-block; background-color: #ffffff; opacity: 0.95; box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); ">
+    <div style="overflow-y:auto; height: 200px;display: inline-block; background-color: #ffffff; opacity: 0.95; box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); ">
         <table border='4' style='border-collapse: collapse;'>
             <tr>
                 <th>DESCUENTOS DISPONIBLES</th>

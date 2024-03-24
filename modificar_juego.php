@@ -7,12 +7,9 @@ if (!isset($_COOKIE['alias'])) {
 }
 
 $alias = $_COOKIE['alias'];
-$consultaRol = $conexion->prepare("SELECT rol FROM usuario WHERE alias = ?");
-$consultaRol->bind_param("s", $alias);
-$consultaRol->execute();
-$resultadoRol = $consultaRol->get_result();
+$rol = $_COOKIE['rol'];
 
-if ($resultadoRol->num_rows == 0 || $resultadoRol->fetch_assoc()['rol'] !== 'administrador') {
+if ($rol !== 'administrador') {
     header('Location: index.php');
     exit();
 }

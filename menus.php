@@ -79,7 +79,7 @@
                 </form>
                 
 
-                <form method="post" action="gestionar_pedidos.php">
+                <form method="post" action="consultar_pedidos.php">
                     <input type="submit" value="Gestionar pedidos">
                 </form>
                 

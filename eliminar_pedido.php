@@ -1,9 +1,5 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['id_descuento']) && isset($_POST['descuento'])) {
-        $id_descuento = $_POST['id_descuento'];
-        $nuevo_descuento = $_POST['descuento'];
-
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
         $conexion = new mysqli("localhost", "root", "", "games4all");
 
         if ($conexion->connect_error) {
@@ -23,22 +19,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $sql = "UPDATE descuento SET valor = $nuevo_descuento WHERE id_descuento = $id_descuento";
-
+        $id_pedido = $_GET['id'];
+        $sql = "DELETE FROM pedido WHERE id_pedido = $id_pedido";
         if ($conexion->query($sql) === TRUE) {
-            header("Location: gestionar_descuentos.php");
+            header("Location: gestionar_pedidos.php");
             exit();
         } else {
-            echo "Error al modificar el descuento: " . $conexion->error;
+            echo "Error al eliminar el descuento: " . $conexion->error;
         }
 
         $conexion->close();
     } else {
-        header("Location: modificar_descuento.php");
+        header("Location: gestionar_pedidos.php");
         exit();
     }
-} else {
-    header("Location: modificar_descuento.php");
-    exit();
-}
 ?>

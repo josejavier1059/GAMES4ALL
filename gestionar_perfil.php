@@ -11,7 +11,12 @@
     </head>
 
      <?php
-        $alias = $_POST["alias"];
+        if (!isset($_COOKIE['alias'])) {
+            header('Location: index.php');
+            exit();
+        }
+    
+        $alias = $_COOKIE['alias'];
 
         $conexion = mysqli_connect("localhost", "root", "", "games4all")or die("Fallo al hacer la consulta.");
         $consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE alias = '$alias'");

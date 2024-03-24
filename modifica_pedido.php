@@ -1,8 +1,11 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['usuario']) && isset($_POST['descuento'])) {
-        $id_usuario = $_POST['usuario'];
+
+    if (isset($_POST['id_pedido']) && isset($_POST['descuento']) && isset($_POST['subtotal']) && isset($_POST['fecha'])) {
+        $id_pedido = $_POST['id_pedido'];
         $descuento = $_POST['descuento'];
+        $subtotal = $_POST['subtotal'];
+        $fecha = $_POST['fecha'];
 
         $conexion = new mysqli("localhost", "root", "", "games4all");
 
@@ -23,22 +26,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $sql = "INSERT INTO descuento (id_usuario, valor) VALUES ($id_usuario, $descuento)";
+        $consulta = $conexion->prepare("UPDATE pedido SET descuento = ?, subtotal = ?, fecha = ? WHERE id_pedido = ?");
+        $consulta->bind_param("ddsi", $descuento, $subtotal, $fecha, $id_pedido);
 
-        if ($conexion->query($sql) === TRUE) {
-            header("Location: gestionar_descuentos.php");
+        if ($consulta->execute()) {
+            header("Location: gestionar_pedidos.php");
             exit();
         } else {
-            echo "Error al añadir el descuento: " . $conexion->error;
+            echo "Error al modificar el pedido: " . $conexion->error;
         }
 
         $conexion->close();
     } else {
-        header("Location: añadir_descuento.php");
+        header("Location: modificar_pedido.php");
         exit();
     }
 } else {
-    header("Location: añadir_descuento.php");
+    header("Location: modificar_pedido.php");
     exit();
 }
 ?>

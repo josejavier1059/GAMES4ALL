@@ -7,22 +7,13 @@ if (!isset($_COOKIE['alias'])) {
 }
 
 $alias = $_COOKIE['alias'];
+$rol = $_COOKIE['rol'];
 
-$consulta = $conexion->prepare("SELECT rol FROM usuario WHERE alias = ?");
-$consulta->bind_param("s", $alias);
-$consulta->execute();
-$resultado = $consulta->get_result();
-
-if ($resultado->num_rows === 0) {
+if ($rol !== 'administrador') {
     header('Location: index.php');
     exit();
 }
 
-$fila = $resultado->fetch_assoc();
-if ($fila['rol'] !== 'administrador') {
-    header('Location: index.php');
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -132,14 +123,22 @@ if ($fila['rol'] !== 'administrador') {
 
 <h2>Introducir Nuevo Juego</h2>
 <form action="procesar_introduce_juego.php" method="post">
-    <input type="text" name="plataforma" required placeholder="Plataforma (ej. PC, PlayStation)">
+    <label for="plataforma">Plataforma:</label>
+    <select name="plataforma" id="plataforma" required placeholder="Plataforma">
+        <option value="PC">PC</option>
+        <option value="Nintendo Switch">Nintendo Switch</option>
+        <option value="PlayStation 4">PlayStation 4</option>
+        <option value="PlayStation 5">PlayStation 5</option>
+        <option value="Xbox One">Xbox One</option>
+        <option value="Xbox Series">Xbox Series</option>
+    </select>
     <input type="text" name="titulo" required placeholder="Título del juego">
     <input type="number" min="0" step="0.01" name="precio" required placeholder="Precio">
     <input type="number" min="0" max="100" step="1" name="rebaja" required placeholder="Rebaja">
     <input type="number" name="stock" required placeholder="Stock">
     <input type="number" name="formato" min="0" max="1" step="1" required placeholder="F0/D1">
     <input type="text" name="genero" placeholder="Género (si no existe ya la info del juego)">
-    <textarea name="descripcion" placeholder="Descripción (si no existe ya la info del juego)"></textarea>
+    <textarea name="descripcion" placeholder="Descripción (si no existe ya la info del juego)" cols="100" rows="5" style="resize: none;"></textarea>
     <input type="submit" value="Introducir Juego">
 </form>
 
