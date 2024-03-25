@@ -51,7 +51,7 @@
         <div style="float: left; width: 20%; height: 350px;margin-top: -25px; background-color: #173E59; color: #ffffff;font-size: 25px;">
 
     <?php   if ($roles == "administrador"){
-                echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL ADMINISTRADOR
+                echo "Panel del $roles:<br> $alias";    //PANEL DEL ADMINISTRADOR
     ?>          
                 <form method="post" action="gestionar_perfil.php">
                     <input type="submit" value="Mostrar perfil">
@@ -81,7 +81,7 @@
     <?php
             }
             else{
-                echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL USUARIO
+                echo "Panel del $roles:<br> $alias <br>";    //PANEL DEL USUARIO
     ?>                  
 
                 <form method="post" action="consultar_pedidos.php">
@@ -98,6 +98,10 @@
 
                 <form method="post" action="gestionar_perfil.php">
                     <input type="submit" value="Mostrar perfil">
+                </form>
+
+                <form method="post" action="usuario_lista_tarjetas.php">
+                    <input type="submit" value="Mostrar tarjetas">
                 </form>
 
                 <form method="post" action="index.php">
