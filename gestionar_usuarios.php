@@ -121,6 +121,9 @@ if ($rol !== 'administrador') {
 
     mysqli_close($conexion);
     ?>
-
+    
+    <form method="POST" action="menus.php">
+    	<input type="submit" value="Volver">
+    </form>
 </body>
 </html>

@@ -41,14 +41,11 @@
             <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
             <input type="submit" value="Editar">
             </form>
-
-
-            <form method="post" action="borrar_usuario.php">
-                <input type="hidden" name="alias" value=<?php echo $alias ?>>
-                <input type="hidden" name="alias_target" value=<?php echo $alias ?>>
-                <input type="submit" value="Borrar cuenta">
-            </form>
-            
+	
+	    <form method="POST" action="menus.php">
+                <input type="submit" value="Volver">
+            </form>	
+	    
         </div>
     </body>
 </html>

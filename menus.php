@@ -4,9 +4,28 @@
     <meta charset="utf-8">
     <title>G4A</title>
     <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        #cart-icon {
+            position: absolute;
+            top: 460px;
+            left: 160px;
+        }
+        #search-icon {
+            position: absolute;
+            top: 460px;
+            left: 130px;
+        }
+    </style>
         <div id="header">
         <h1>GAMES4ALL</h1>
         <h4>¡Consigue tu juego preferido al mejor precio!</h4>
+        <div id="cart-icon">
+            <a href="hacer_pedido.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #63E6BE;"></i></a>
+        </div>
+        <div id="search-icon">
+            <a href="buscar_juegos.php"><i class="fa-solid fa-magnifying-glass" style="color: #63E6BE;"></i></a>
+        </div>
     </div>
     </head>
 
@@ -29,37 +48,31 @@
         
     ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 20%; height: 350px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 20%; height: 350px;margin-top: -25px; background-color: #173E59; color: #ffffff;font-size: 25px;">
 
     <?php   if ($roles == "administrador"){
                 echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL ADMINISTRADOR
     ?>          
                 <form method="post" action="gestionar_perfil.php">
-                    <input type="submit" value="Gestionar perfil">
+                    <input type="submit" value="Mostrar perfil">
                 </form>
-                
 
                 <form method="post" action="gestionar_usuarios.php">
                     <input type="submit" value="Gestionar usuarios">
                 </form>
-            
-
+        
                 <form method="post" action="gestionar_videojuegos.php">
                     <input type="submit" value="Gestionar videojuegos">
                 </form>
-                
-                
+                 
                 <form method="post" action="gestionar_pedidos.php">
                     <input type="submit" value="Gestionar pedidos">
                 </form>
                 
-
                 <form method="post" action="gestionar_descuentos.php">
                     <input type="submit" value="Gestionar descuentos">
                 </form>
                 
-              
-
                 <form method="post" action="index.php">
                     <input type="hidden" name="logout" value="true">
                     <input type="submit" value="Cerrar sesión">
@@ -69,34 +82,22 @@
             }
             else{
                 echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL USUARIO
-    ?>          
-                <form method="post" action="buscar_juegos.php">
-                    <input type="submit" value="Buscar videojuegos">
-                </form>
-                
-
-                <form method="post" action="hacer_pedido.php">
-                    <input type="submit" value="Hacer pedido">
-                </form>
-                
+    ?>                  
 
                 <form method="post" action="consultar_pedidos.php">
-                    <input type="submit" value="Gestionar pedidos">
+                    <input type="submit" value="Mis pedidos">
                 </form>
-                
 
                 <form method="post" action="biblioteca_juegos.php">
                     <input type="submit" value="Mi biblioteca de juegos">
-                </form>
-            
-
-                <form method="post" action="gestionar_perfil.php">
-                    <input type="submit" value="Gestionar perfil">
-                </form>
-                
+                </form>                
 
                 <form method="post" action="consultar_descuentos.php">
-                    <input type="submit" value="Gestionar descuentos">
+                    <input type="submit" value="Mis descuentos">
+                </form>
+
+                <form method="post" action="gestionar_perfil.php">
+                    <input type="submit" value="Mostrar perfil">
                 </form>
 
                 <form method="post" action="index.php">
