@@ -81,7 +81,7 @@
     <?php
             }
             else{
-                echo "Panel del $roles:<br> $alias <br>";    //PANEL DEL USUARIO
+                echo "Panel del $roles:<br> $alias";    //PANEL DEL USUARIO
     ?>                  
 
                 <form method="post" action="consultar_pedidos.php">
