@@ -42,9 +42,14 @@
             <input type="submit" value="Editar">
             </form>
 	        
-            <form method="POST" action="eliminar_usuario.php">
-                <input type="submit" value="Borrar cuenta">
-            </form> 
+            <?php
+            if($roles != "administrador"){
+?>
+                <form method="POST" action="eliminar_usuario.php">
+                    <input type="submit" value="Borrar cuenta">
+                </form> 
+<?php       }
+            ?>
 
 	        <form method="POST" action="menus.php">
                 <input type="submit" value="Volver">
