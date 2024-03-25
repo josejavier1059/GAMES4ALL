@@ -30,7 +30,7 @@
 
     ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 20%; height: 400px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 20%; height: 450px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
             <h3>Perfil de <?php echo $alias ?></h3>
             <h6>Nombre de usuario: <?php echo $alias ?></h6>
             <h6>Rol: <?php echo $roles ?></h6>
@@ -41,8 +41,12 @@
             <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
             <input type="submit" value="Editar">
             </form>
-	
-	    <form method="POST" action="menus.php">
+	        
+            <form method="POST" action="eliminar_usuario.php">
+                <input type="submit" value="Borrar cuenta">
+            </form> 
+
+	        <form method="POST" action="menus.php">
                 <input type="submit" value="Volver">
             </form>	
 	    
