@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_juego'])) {
         $imagen_temp = $_FILES['imagen']['tmp_name'];
         $imagen_extension = strtolower(pathinfo($imagen_nombre, PATHINFO_EXTENSION));
 
-        $imagen_nueva = str_replace(" ", "_", $titulo) . ".$imagen_extension";
+        $caracteres_especiales = array(" ", "#", "$", "%", "&", "*", ":", "<", ">", "?", "/", "\\", "{", "}", "|", "~", "+", "!");
+        $imagen_nueva = preg_replace('/[' . preg_quote(implode('', $caracteres_especiales), '/') . ']/', '_', $titulo) . ".$imagen_extension";
+
         $imagen_destino = "images/" . $imagen_nueva;
         move_uploaded_file($imagen_temp, $imagen_destino);
     } else {
@@ -146,6 +148,10 @@ if (isset($_GET['id'])) {
     </style>
 </head>
 <body style="background-color: #4CC5B0; color: #000000;">
+
+    <form method="POST" action="ver_eliminar_juegos.php">
+        <input type="submit" value="Volver">
+    </form>
 
 <h2>Modificar Juego</h2>
 

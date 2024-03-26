@@ -72,7 +72,7 @@
                         <td>".$fila['numero']."</td>
                         <td>".$fila['descuento']."%</td>
                         <td>".$fila['subtotal']."€</td>
-                        <td>".($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)))."€</td>
+                        <td>".number_format($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)),2)."€</td>
                         <td>
                             <a href='eliminar_pedido.php?id=".$fila['id_pedido']."'>Eliminar</a> | 
                             <a href='modificar_pedido.php?id=".$fila['id_pedido']."'>Modificar</a> | 

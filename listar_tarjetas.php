@@ -92,8 +92,11 @@ if (isset($_GET['id_usuario'])) {
         }
     </style>
 </head>
-<body>
+<body style="background-color: #4CC5B0; color: #000000;">
    
+    <form method="POST" action="gestionar_usuarios.php">
+        <input type="submit" value="Volver">
+    </form>
 
     <?php
     $consulta = "SELECT * FROM tarjeta WHERE id_usuario = '$id_usuario'";

@@ -84,5 +84,9 @@ $conexion->close();
     <input type="submit" value="Introducir Tarjeta">
 </form>
 
+<form action="ver_carrito.php" method="post">
+    <input type="submit" value="Volver">
+</form>
+
 </body>
 </html>

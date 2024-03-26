@@ -27,7 +27,9 @@ $imagen_nombre = $_FILES['imagen']['name'];
 $imagen_temp = $_FILES['imagen']['tmp_name'];
 $imagen_extension = strtolower(pathinfo($imagen_nombre, PATHINFO_EXTENSION));
 
-$imagen_nueva = str_replace(" ", "_", $titulo) . ".$imagen_extension";
+$caracteres_especiales = array(" ", "#", "$", "%", "&", "*", ":", "<", ">", "?", "/", "\\", "{", "}", "|", "~", "+", "!");
+$imagen_nueva = preg_replace('/[' . preg_quote(implode('', $caracteres_especiales), '/') . ']/', '_', $titulo) . ".$imagen_extension";
+
 $imagen_destino = "images/" . $imagen_nueva;
 move_uploaded_file($imagen_temp, $imagen_destino);
 
@@ -70,5 +72,5 @@ if (!mysqli_query($conexion, $insertarJuego)) {
     exit();
 }
 
-header('Location: buscar_juegos.php?success=1');
+header('Location: admin_introduce_juego.php?success=1');
 ?>

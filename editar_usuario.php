@@ -5,7 +5,6 @@ if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
 
-// Verifica que se haya recibido un id_usuario
 if (!isset($_POST['id_usuario']) || empty($_POST['id_usuario'])) {
     die("No se proporcionó el ID del usuario.");
 }
@@ -23,8 +22,6 @@ if ($resultado->num_rows == 0) {
 
 $usuario = $resultado->fetch_assoc();
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +44,7 @@ $usuario = $resultado->fetch_assoc();
         Nueva Contraseña: <input type="password" name="password_nueva"><br>
         Confirmar Nueva Contraseña: <input type="password" name="password_confirmacion"><br>
         Correo: <input type="email" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>"><br>
+        Nombre Completo: <input type="text" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>"><br>
         <input type="submit" value="Guardar cambios">
 </form>
 

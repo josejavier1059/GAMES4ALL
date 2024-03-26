@@ -93,12 +93,16 @@ if ($rol !== 'administrador') {
     <h4>Introduce un nuevo juego o revisa la información existente</h4>
 </div>
 
+<form method="POST" action="gestionar_videojuegos.php">
+    <input type="submit" value="Volver">
+</form>
+
 <h2>Información de Juegos Existentes</h2>
 <table>
     <thead>
         <tr>
-            <th>Imagen</th>
-            <th>Título</th>
+            <th></th>
+            <th>Juego</th>
             <th>Género</th>
             <th>Descripción</th>
         </tr>
@@ -106,7 +110,7 @@ if ($rol !== 'administrador') {
     <tbody>
         <?php
         $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar con la base de datos.");
-        $consulta = "SELECT * FROM info_juego";
+        $consulta = "SELECT * FROM info_juego ORDER BY titulo_juego ASC";
         $resultado = mysqli_query($conexion, $consulta);
 
         while ($fila = mysqli_fetch_assoc($resultado)) {
@@ -122,6 +126,7 @@ if ($rol !== 'administrador') {
 </table>
 
 <h2>Introducir Nuevo Juego</h2>
+<p>*NOTA: Descripción, Género e Imagen solo son necesarios para un juego nuevo, si se introducen de nuevo actualizará los datos</p>
 <form action="procesar_introduce_juego.php" method="post" enctype="multipart/form-data">
     <label for="plataforma">Plataforma:</label>
     <select name="plataforma" id="plataforma" required placeholder="Plataforma">
@@ -137,8 +142,9 @@ if ($rol !== 'administrador') {
     <input type="number" min="0" max="100" step="1" name="rebaja" required placeholder="Rebaja">
     <input type="number" name="stock" required placeholder="Stock">
     <input type="number" name="formato" min="0" max="1" step="1" required placeholder="F0/D1">
-    <input type="text" name="genero" placeholder="Género (si no existe ya la info del juego)">
-    <textarea name="descripcion" placeholder="Descripción (si no existe ya la info del juego)" cols="100" rows="5" style="resize: none;"></textarea>
+    <input type="text" name="genero" placeholder="Género (*Nota)">
+    <textarea name="descripcion" placeholder="Descripción (*Nota)" cols="100" rows="5" style="resize: none;"></textarea>
+    <label>Imagen:</label>
     <input type="file" name="imagen" accept="image/*">
     <br>
     <input type="submit" value="Introducir Juego">

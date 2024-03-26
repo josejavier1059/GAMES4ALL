@@ -41,26 +41,27 @@
             <h6>Contraseña: <?php echo $pass ?></h6>
             <h6>Email: <?php echo $email ?></h6>
             <h6>Nombre: <?php echo $nombre ?></h6>
+            
+<?php       if($roles != "administrador"){?>
             <h3>Dirección</h3>
             <h6>País: <?php echo $pais ?></h6>
             <h6>Ciudad: <?php echo $ciudad ?></h6>
             <h6>Calle: <?php echo $direccion ?></h6>
             <h6>Código Postal: <?php echo $cod_postal ?></h6>
-
+<?php       }?>
             
             <form method="post" action="editar_usuario.php">
             <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
             <input type="submit" value="Editar">
             </form>
-	        
-            <form method="post" action="datos_direccion.php?origen=perfil">
-            <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
-            <input type="submit" value="Editar dirección">
-            </form>
 
             <?php
             if($roles != "administrador"){
 ?>
+            <form method="post" action="datos_direccion.php?origen=perfil">
+                <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
+                <input type="submit" value="Editar dirección">
+            </form>
                 <form method="POST" action="eliminar_usuario.php">
                     <input type="submit" value="Borrar cuenta">
                 </form> 

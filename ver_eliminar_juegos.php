@@ -87,13 +87,17 @@ if ($rol !== 'administrador') {
 </head>
 <body>
 
+<form method="POST" action="gestionar_videojuegos.php">
+    <input type="submit" value="Volver">
+</form>
+
 <h2>Juegos Existentes</h2>
 <table>
     <head>
         <tr>
-            <th>ID</th>
+            <th></th>
+            <th>Titulo</th>
             <th>Plataforma</th>
-            <th>Título</th>
             <th>Precio</th>
             <th>Rebaja</th>
             <th>Stock</th>
@@ -104,13 +108,13 @@ if ($rol !== 'administrador') {
     <body style="background-color: #4CC5B0; color: #000000;">
         <?php
         $conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
-        $consulta = "SELECT id_juego, plataforma, titulo, precio, rebaja, stock, formato FROM juego";
+        $consulta = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.stock, juego.formato, CONCAT('images/', info_juego.imagen) AS imagen FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego ORDER BY titulo ASC;";
         $resultado = mysqli_query($conexion, $consulta);
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>
-            <td>".$fila['id_juego']."</td>
-            <td>".$fila['plataforma']."</td>
+            <td><img src='".$fila['imagen']."' style='width: 50px; height: 50px;'></td>
             <td>".$fila['titulo']."</td>
+            <td>".$fila['plataforma']."</td>
             <td>".$fila['precio']."€</td>
             <td>".$fila['rebaja']."%</td>
             <td>".$fila['stock']."</td>

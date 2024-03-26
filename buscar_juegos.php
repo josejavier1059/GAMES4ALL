@@ -73,9 +73,15 @@
     </div>
     
     <div>
-        <form method="POST" action="menus.php">
-            <input type="submit" value="Volver">
-        </form>
+        <?php if (isset($_GET['admin'])) { ?>
+            <form method="POST" action="gestionar_videojuegos.php">
+                <input type="submit" value="Volver">
+            </form>
+        <?php } else { ?>
+            <form method="POST" action="menus.php">
+                <input type="submit" value="Volver">
+            </form>
+        <?php } ?>
     </div>
 
     <form action="buscar_juegos.php" method="post">
@@ -90,15 +96,15 @@
     $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : '';
     $genero = isset($_POST['genero']) ? $_POST['genero'] : '';
 
-    $consultaSQL = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.formato, info_juego.genero, info_juego.descripcion, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio_rebajado, CONCAT('images/', info_juego.imagen) AS imagen FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego WHERE (juego.plataforma LIKE '%$filtro%' OR juego.titulo LIKE '%$filtro%') AND info_juego.genero LIKE '%$genero%'";
+    $consultaSQL = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.formato, info_juego.genero, info_juego.descripcion, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio_rebajado, CONCAT('images/', info_juego.imagen) AS imagen FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego WHERE (juego.plataforma LIKE '%$filtro%' OR juego.titulo LIKE '%$filtro%') AND info_juego.genero LIKE '%$genero%' ORDER BY juego.titulo ASC;";
 
     $resultado = mysqli_query($conexion, $consultaSQL);
     echo "<div style='overflow-y:auto; height: 300px; background-color: #ffffff; opacity: 0.95; box-shadow: 0 0 10px 0 rgba(0,0,0,0.5); padding: 0; margin: 0;'>";
     if(mysqli_num_rows($resultado) > 0) {
         echo "<table style='width:100%; border-collapse: collapse;'>";
         echo "<tr>
-            <th>Imagen</th>
-            <th>Título</th>
+            <th></th>
+            <th>Juego</th>
             <th>Género</th>
             <th>Plataforma</th>
             <th>Precio</th>

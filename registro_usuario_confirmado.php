@@ -17,13 +17,14 @@
         $alias_target = $_POST["alias_target"];
         $pass_target = $_POST["pass_target"];
         $email_target = $_POST["email_target"];
+        $nombre = $_POST["nombre"];
 
         
         $conexion = mysqli_connect("localhost", "root", "", "games4all")or die("Fallo al hacer la consulta");
     
     ?>
         <?php   
-                if(mysqli_query($conexion, "INSERT INTO usuario(alias, password, correo) VALUES ('$alias_target', '$pass_target', '$email_target')")){
+                if(mysqli_query($conexion, "INSERT INTO usuario(alias, password, correo, nombre) VALUES ('$alias_target', '$pass_target', '$email_target', '$nombre')")){
         ?>          ¡El usuario <?php echo $alias_target ?> se ha creado con éxito!<br><br>
 
                     <form method="POST" action="login.php">

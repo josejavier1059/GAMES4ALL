@@ -23,6 +23,9 @@
                 <br><br>
                 Email:
                 <input type="email" name="email_target" id="email_target" placeholder="Email" required>
+                <br><br>
+                Nombre Completo: 
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" required>
                 <br><br><br>
                 <input type="submit" value="Confirmar">
             </form>

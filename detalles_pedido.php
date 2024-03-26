@@ -98,17 +98,19 @@
                     <th>JUEGO</th>
                     <th>PLATAFORMA</th>
                     <th>FORMATO</th>
+                    <th>FECHA ENTREGA</th>
                 </tr>
 
                 <?php 
-                $sql = "SELECT p.id_pedido, j.titulo, j.plataforma, j.formato FROM pedido p JOIN juegos_pedido jp ON p.id_pedido = jp.id_pedido JOIN juego j ON jp.id_juego = j.id_juego WHERE p.id_pedido = ".$id_pedido."";
+                $sql = "SELECT p.id_pedido, j.titulo, j.plataforma, j.formato, jp.fecha_entrega FROM pedido p JOIN juegos_pedido jp ON p.id_pedido = jp.id_pedido JOIN juego j ON jp.id_juego = j.id_juego WHERE p.id_pedido = ".$id_pedido."";
                 $resultado = $conexion->query($sql);
 
                 while ($fila = $resultado->fetch_assoc()) {
                     echo "<tr>
                             <td>".$fila['titulo']."</td>
                             <td>".$fila['plataforma']."</td>
-                            <td>";echo $fila['formato'] == 0 ? "Físico" : "Digital";"</td>
+                            <td>".($fila['formato'] == 0 ? "Físico" : "Digital")."</td>
+                            <td>".($fila['formato'] == 0 ? date('d/m/Y', strtotime($fila['fecha_entrega'])) : '')."</td>
                         </tr>";
                 }
 

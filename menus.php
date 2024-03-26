@@ -17,18 +17,6 @@
             left: 130px;
         }
     </style>
-        <div id="header">
-        <h1>GAMES4ALL</h1>
-        <h4>¡Consigue tu juego preferido al mejor precio!</h4>
-        <div id="cart-icon">
-            <a href="ver_carrito.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #63E6BE;"></i></a>
-        </div>
-        <div id="search-icon">
-            <a href="buscar_juegos.php"><i class="fa-solid fa-magnifying-glass" style="color: #63E6BE;"></i></a>
-        </div>
-    </div>
-    </head>
-
     <?php
         $alias = $_COOKIE['alias'];
 
@@ -53,6 +41,21 @@
         setcookie("direccion", $direccion, 0, "/");
         
     ?>
+        <div id="header">
+        <h1>GAMES4ALL</h1>
+        <h4>¡Consigue tu juego preferido al mejor precio!</h4>
+        <?php if ($_COOKIE['rol'] !== 'administrador') { ?>
+        <div id="cart-icon">
+            <a href="ver_carrito.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #63E6BE;"></i></a>
+        </div>
+        <?php } ?>
+
+        <div id="search-icon">
+            <a href="buscar_juegos.php"><i class="fa-solid fa-magnifying-glass" style="color: #63E6BE;"></i></a>
+        </div>
+    </div>
+    </head>
+    
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
         <div style="float: left; width: 20%; height: 350px;margin-top: -25px; background-color: #173E59; color: #ffffff;font-size: 25px;">
 

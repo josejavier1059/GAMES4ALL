@@ -32,7 +32,7 @@ $sql_juegos = "SELECT juego.titulo, juego.plataforma, juego.precio, juego.format
                WHERE carrito.id_usuario = $id_usuario";
 $resultado_juegos = $conexion->query($sql_juegos);
 
-$sql_direccion = "SELECT pais, ciudad, direccion, cod_postal FROM usuario WHERE id_usuario = $id_usuario";
+$sql_direccion = "SELECT pais, ciudad, direccion, cod_postal, nombre FROM usuario WHERE id_usuario = $id_usuario";
 $resultado_direccion = $conexion->query($sql_direccion);
 $fila_direccion = $resultado_direccion->fetch_assoc();
 
@@ -66,6 +66,9 @@ $resultado_descuentos = $conexion->query($sql_descuentos);
         <?php endwhile; ?>
     </ul>
     <?php endif; ?>
+
+    <h3>Destinatario:</h3>
+    <p><?php echo $fila_direccion["nombre"] ?></p>
 
     <h3>Dirección de Envío:</h3>
     <?php if ($fila_direccion): ?>
@@ -114,6 +117,10 @@ $resultado_descuentos = $conexion->query($sql_descuentos);
 
     <form action="compra_realizada.php" method="post">
         <input type="submit" value="Comprar">
+    </form>
+
+    <form action="introducir_tarjeta.php" method="post">
+        <input type="submit" value="Volver">
     </form>
 
 </body>
