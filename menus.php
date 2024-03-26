@@ -23,13 +23,19 @@
         $pass = $linea["password"];
         $email = $linea["correo"];
 
+        $direccion = $linea["direccion"];
+        if ($direccion == "") {
+            $direccion = "null";
+        }
+
         setcookie("id", $id, 0, "/");
         setcookie("rol", $roles, 0, "/");
         setcookie("correo", $email, 0, "/");
+        setcookie("direccion", $direccion, 0, "/");
         
     ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 20%; height: 350px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 20%; height: 350px; background-color: #173E59; color: #ffffff;font-size: 25px;">
 
     <?php   if ($roles == "administrador"){
                 echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL ADMINISTRADOR
@@ -74,17 +80,17 @@
                 </form>
                 
 
-                <form method="post" action="hacer_pedido.php">
-                    <input type="submit" value="Hacer pedido">
+                <form method="post" action="ver_carrito.php">
+                    <input type="submit" value="Acceder al Carrito">
                 </form>
                 
 
                 <form method="post" action="consultar_pedidos.php">
-                    <input type="submit" value="Gestionar pedidos">
+                    <input type="submit" value="Mis pedidos">
                 </form>
                 
 
-                <form method="post" action="biblioteca_juegos.php">
+                <form method="post" action="biblioteca.php">
                     <input type="submit" value="Mi biblioteca de juegos">
                 </form>
             
@@ -95,7 +101,7 @@
                 
 
                 <form method="post" action="consultar_descuentos.php">
-                    <input type="submit" value="Gestionar descuentos">
+                    <input type="submit" value="Mis descuentos">
                 </form>
 
                 <form method="post" action="index.php">

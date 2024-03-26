@@ -82,7 +82,7 @@
                         <td>".$fila['numero']."</td>
                         <td>".$fila['descuento']."%</td>
                         <td>".$fila['subtotal']."€</td>
-                        <td>".($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)))."€</td>
+                        <td>".number_format($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)),2)."€</td>
                         <td>";echo date('d/m/Y', strtotime($fila['fecha']));"</td>
                     </tr>";
             }

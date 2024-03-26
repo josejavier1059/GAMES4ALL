@@ -16,18 +16,36 @@ if ($rol !== 'administrador') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_juego'])) {
     $id_juego = $_POST['id_juego'];
+    $titulo = $_POST['titulo'];
     $precio = $_POST['precio'];
     $rebaja = $_POST['rebaja'];
     $stock = $_POST['stock'];
     $genero = $_POST['genero'];
     $descripcion = $_POST['descripcion'];
+    
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['size'] > 0) {
+        $imagen_nombre = $_FILES['imagen']['name'];
+        $imagen_temp = $_FILES['imagen']['tmp_name'];
+        $imagen_extension = strtolower(pathinfo($imagen_nombre, PATHINFO_EXTENSION));
+
+        $imagen_nueva = str_replace(" ", "_", $titulo) . ".$imagen_extension";
+        $imagen_destino = "images/" . $imagen_nueva;
+        move_uploaded_file($imagen_temp, $imagen_destino);
+    } else {
+        $stmtImagen = $conexion->prepare("SELECT imagen FROM info_juego WHERE titulo_juego=(SELECT titulo FROM juego WHERE id_juego=?)");
+        $stmtImagen->bind_param("i", $id_juego);
+        $stmtImagen->execute();
+        $resultadoImagen = $stmtImagen->get_result();
+        $filaImagen = $resultadoImagen->fetch_assoc();
+        $imagen_nueva = $filaImagen['imagen'];
+    }
 
     $stmtJuego = $conexion->prepare("UPDATE juego SET precio=?, rebaja=?, stock=? WHERE id_juego=?");
     $stmtJuego->bind_param("diii", $precio, $rebaja, $stock, $id_juego);
     $stmtJuego->execute();
 
-    $stmtInfoJuego = $conexion->prepare("UPDATE info_juego SET genero=?, descripcion=? WHERE titulo_juego=(SELECT titulo FROM juego WHERE id_juego=?)");
-    $stmtInfoJuego->bind_param("ssi", $genero, $descripcion, $id_juego);
+    $stmtInfoJuego = $conexion->prepare("UPDATE info_juego SET genero=?, descripcion=?, imagen=? WHERE titulo_juego=(SELECT titulo FROM juego WHERE id_juego=?)");
+    $stmtInfoJuego->bind_param("sssi", $genero, $descripcion, $imagen_nueva,$id_juego);
     $stmtInfoJuego->execute();
 
     header("Location: ver_eliminar_juegos.php?mensaje=juegoModificado");
@@ -131,8 +149,9 @@ if (isset($_GET['id'])) {
 
 <h2>Modificar Juego</h2>
 
-<form action="modificar_juego.php" method="post">
+<form action="modificar_juego.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id_juego" value="<?php echo htmlspecialchars($juego['id_juego']); ?>">
+    <input type="hidden" name="titulo" value="<?php echo htmlspecialchars($juego['titulo']); ?>">
     <p>Plataforma: <?php echo htmlspecialchars($juego['plataforma']); ?></p>
     <p>Título: <?php echo htmlspecialchars($juego['titulo']); ?></p>
     <p>Formato: <?php echo $juego['formato'] == 0 ? "Físico" : "Digital"; ?></p>
@@ -147,8 +166,11 @@ if (isset($_GET['id'])) {
     <br>
     <div>
         <label for="stock">Descripción:</label>
-        <textarea name="descripcion" required><?php echo htmlspecialchars($juego['descripcion']); ?></textarea>
+        <textarea name="descripcion" required cols="100" rows="5" style="resize: none;"><?php echo htmlspecialchars($juego['descripcion']); ?></textarea>
     </div>
+    <label for="imagen">Imagen:</label>
+    <input type="file" name="imagen" accept="image/*">
+    <img src="<?php echo 'images/' . $juego['imagen']; ?>" alt="Imagen anterior" width="256 px" height="256 px">
     <input type="submit" value="Modificar Juego">
 </form>
 

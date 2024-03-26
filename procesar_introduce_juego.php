@@ -23,24 +23,31 @@ $formato = $_POST['formato'];
 $genero = $_POST['genero'];
 $descripcion = $_POST['descripcion'];
 
-// Verificar si existe info del juego
+$imagen_nombre = $_FILES['imagen']['name'];
+$imagen_temp = $_FILES['imagen']['tmp_name'];
+$imagen_extension = strtolower(pathinfo($imagen_nombre, PATHINFO_EXTENSION));
+
+$imagen_nueva = str_replace(" ", "_", $titulo) . ".$imagen_extension";
+$imagen_destino = "images/" . $imagen_nueva;
+move_uploaded_file($imagen_temp, $imagen_destino);
+
 $consulta = "SELECT * FROM info_juego WHERE titulo_juego = '$titulo'";
 $resultado = mysqli_query($conexion, $consulta);
 if (mysqli_num_rows($resultado) == 0) { //No existe info del juego
     //DEBE proporcionar info
-    if (empty($descripcion) || empty($genero)) {
+    if (empty($descripcion) || empty($genero) || empty($imagen_nombre)) {
         header('Location: admin_introduce_juego.php?error=faltanDatosInfo');
         exit();
     }
-    $insertarInfo = "INSERT INTO info_juego (titulo_juego, genero, descripcion) VALUES ('$titulo', '$genero', '$descripcion')";
+    $insertarInfo = "INSERT INTO info_juego (titulo_juego, genero, descripcion, imagen) VALUES ('$titulo', '$genero', '$descripcion', '$imagen_nueva')";
     if (!mysqli_query($conexion, $insertarInfo)) {
         header('Location: admin_introduce_juego.php?error=errorAlIntoducirInfo');
         exit();
     }
 } else {
     //actualizamos la info (si se han indicado los campos)
-    if (!empty($descripcion) && !empty($genero)) {
-        $actualizarInfo = "UPDATE info_juego SET genero = '$genero', descripcion = '$descripcion' WHERE titulo_juego = '$titulo'";
+    if (!empty($descripcion) && !empty($genero) && !empty($imagen_nombre)) {
+        $actualizarInfo = "UPDATE info_juego SET genero = '$genero', descripcion = '$descripcion', imagen= '$imagen_nueva' WHERE titulo_juego = '$titulo'";
         if (!mysqli_query($conexion, $actualizarInfo)) {
             header('Location: admin_introduce_juego.php?error=errorAlActualizarInfo');
             exit();

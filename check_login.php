@@ -25,6 +25,7 @@
                     if($fila['alias'] == $alias_log && $fila['password'] == $passw_log){
                         $alias = $fila['alias'];
                         $pass = $fila['password'];
+                        $direccion = $fila['direccion'];
                         setcookie("alias", $alias, 0, "/");
                         setcookie("password", $pass, 0, "/");
                         ?><h4>¡Bienvenido <?php echo $alias; ?>, nos alegra verte de nuevo!</h4>

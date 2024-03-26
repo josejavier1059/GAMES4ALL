@@ -97,7 +97,7 @@ if ($rol !== 'administrador') {
 <table>
     <thead>
         <tr>
-            <th>ID</th>
+            <th>Imagen</th>
             <th>Título</th>
             <th>Género</th>
             <th>Descripción</th>
@@ -110,19 +110,19 @@ if ($rol !== 'administrador') {
         $resultado = mysqli_query($conexion, $consulta);
 
         while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr>";
-            echo "<td>".$fila['id_info']."</td>";
-            echo "<td>".$fila['titulo_juego']."</td>";
-            echo "<td>".$fila['genero']."</td>";
-            echo "<td>".$fila['descripcion']."</td>";
-            echo "</tr>";
+            echo "<tr>
+                  <td><img src='images/".$fila['imagen']."' style='width: 50px; height: 50px;'></td>
+                  <td>".$fila['titulo_juego']."</td>
+                  <td>".$fila['genero']."</td>
+                  <td>".$fila['descripcion']."</td>
+                  </tr>";
         }
         ?>
     </tbody>
 </table>
 
 <h2>Introducir Nuevo Juego</h2>
-<form action="procesar_introduce_juego.php" method="post">
+<form action="procesar_introduce_juego.php" method="post" enctype="multipart/form-data">
     <label for="plataforma">Plataforma:</label>
     <select name="plataforma" id="plataforma" required placeholder="Plataforma">
         <option value="PC">PC</option>
@@ -139,6 +139,8 @@ if ($rol !== 'administrador') {
     <input type="number" name="formato" min="0" max="1" step="1" required placeholder="F0/D1">
     <input type="text" name="genero" placeholder="Género (si no existe ya la info del juego)">
     <textarea name="descripcion" placeholder="Descripción (si no existe ya la info del juego)" cols="100" rows="5" style="resize: none;"></textarea>
+    <input type="file" name="imagen" accept="image/*">
+    <br>
     <input type="submit" value="Introducir Juego">
 </form>
 

@@ -27,19 +27,35 @@
         $alias = $linea["alias"];
         $pass = $linea["password"];
         $email = $linea["correo"];
+        $nombre = $linea["nombre"];
+        $pais = $linea["pais"];
+        $ciudad = $linea["ciudad"];
+        $direccion = $linea["direccion"];
+        $cod_postal = $linea["cod_postal"];
 
     ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 20%; height: 400px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 20%; height: 450px; background-color: #173E59; color: #ffffff;font-size: 25px;">
             <h3>Perfil de <?php echo $alias ?></h3>
             <h6>Nombre de usuario: <?php echo $alias ?></h6>
-            <h6>Rol: <?php echo $roles ?></h6>
             <h6>Contraseña: <?php echo $pass ?></h6>
             <h6>Email: <?php echo $email ?></h6>
+            <h6>Nombre: <?php echo $nombre ?></h6>
+            <h3>Dirección</h3>
+            <h6>País: <?php echo $pais ?></h6>
+            <h6>Ciudad: <?php echo $ciudad ?></h6>
+            <h6>Calle: <?php echo $direccion ?></h6>
+            <h6>Código Postal: <?php echo $cod_postal ?></h6>
+
             
             <form method="post" action="editar_usuario.php">
             <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
             <input type="submit" value="Editar">
+            </form>
+
+            <form method="post" action="datos_direccion.php?origen=perfil">
+            <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
+            <input type="submit" value="Editar dirección">
             </form>
 
 
@@ -47,6 +63,9 @@
                 <input type="hidden" name="alias" value=<?php echo $alias ?>>
                 <input type="hidden" name="alias_target" value=<?php echo $alias ?>>
                 <input type="submit" value="Borrar cuenta">
+            </form>
+            <form method="POST" action="menus.php">
+                <input type="submit" value="Volver">
             </form>
             
         </div>
