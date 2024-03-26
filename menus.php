@@ -21,7 +21,7 @@
         <h1>GAMES4ALL</h1>
         <h4>¡Consigue tu juego preferido al mejor precio!</h4>
         <div id="cart-icon">
-            <a href="hacer_pedido.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #63E6BE;"></i></a>
+            <a href="ver_carrito.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #63E6BE;"></i></a>
         </div>
         <div id="search-icon">
             <a href="buscar_juegos.php"><i class="fa-solid fa-magnifying-glass" style="color: #63E6BE;"></i></a>
@@ -89,20 +89,11 @@
             else{
                 echo "Panel de $roles<br>Has iniciado sesión como:<br>$alias";    //PANEL DEL USUARIO
     ?>          
-                <form method="post" action="buscar_juegos.php">
-                    <input type="submit" value="Buscar videojuegos">
-                </form>
-                
-
-                <form method="post" action="ver_carrito.php">
-                    <input type="submit" value="Acceder al Carrito">
-                </form>
-                
                 <form method="post" action="consultar_pedidos.php">
                     <input type="submit" value="Gestionar pedidos">
                 </form>
 
-                <form method="post" action="biblioteca_juegos.php">
+                <form method="post" action="biblioteca.php">
                     <input type="submit" value="Mi biblioteca de juegos">
                 </form>                
 

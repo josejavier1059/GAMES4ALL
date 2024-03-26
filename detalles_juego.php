@@ -22,7 +22,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
     
     if(mysqli_num_rows($resultado) == 1) {
         $juego = mysqli_fetch_assoc($resultado);
-        
+            
         echo "<h1>".$juego['titulo']."</h1>
             <p>Plataforma: ".$juego['plataforma']."</p>
             <p>Precio: ".$juego['precio']."€</p>
@@ -34,34 +34,47 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
             <img src='".$juego['imagen']."' style='width: 200px; height: 200px;'>";
 
         echo"<br><br>";
-        
+
+        $comprado = false;
+        if($juego['formato'] == 1) {
+            $consultaBiblioteca = "SELECT * FROM biblioteca WHERE id_usuario = $id_usuario AND id_juego = $id_juego";
+            $resultadoBiblioteca = mysqli_query($conexion, $consultaBiblioteca);
+            if(mysqli_num_rows($resultadoBiblioteca) > 0) { //si está en la biblioteca
+                $comprado = true;
+            }
+        }
+
         $consultaSQL = "SELECT * FROM carrito WHERE id_usuario = $id_usuario AND id_juego = $id_juego";
         $resultado = mysqli_query($conexion, $consultaSQL);
-        
-        if(mysqli_num_rows($resultado) == 1) {
-            echo "<form method='POST' action='quitar_carrito.php'>
-                <input type='hidden' name='id_juego' value='".$juego['id_juego']."'>
-                <input type='submit' value='Quitar del Carrito'>
-                </form>";
 
-                echo "<form method='POST' action='ver_carrito.php'>
-                <input type='submit' value='Acceder al Carrito'>
-                </form>";
-                
+        if ($comprado) {
+            echo "<p>Ya tienes este juego en tu biblioteca.</p>";
         } else {
-            if($juego['stock'] > 0){
-                echo "<form method='POST' action='añadir_carrito.php'>
+            if(mysqli_num_rows($resultado) == 1) {
+                echo "<form method='POST' action='quitar_carrito.php'>
                     <input type='hidden' name='id_juego' value='".$juego['id_juego']."'>
-                    <input type='submit' value='Añadir al Carrito'>
+                    <input type='submit' value='Quitar del Carrito'>
+                    </form>";
+    
+                    echo "<form method='POST' action='ver_carrito.php'>
+                    <input type='submit' value='Acceder al Carrito'>
                     </form>";
             } else {
-                echo "<p>Agotado temporalmente</p>";
+                if($juego['stock'] > 0){
+                    echo "<form method='POST' action='añadir_carrito.php'>
+                        <input type='hidden' name='id_juego' value='".$juego['id_juego']."'>
+                        <input type='submit' value='Añadir al Carrito'>
+                        </form>";
+                } else {
+                    echo "<p>Agotado temporalmente</p>";
+                }
             }
         }
                 
         echo "<form method='POST' action='buscar_juegos.php'>
             <input type='submit' value='Volver'>
             </form>";
+
     } else {
         echo "El juego no existe.";
         header('Location: buscar_juegos.php');
