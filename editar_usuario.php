@@ -49,5 +49,9 @@ $usuario = $resultado->fetch_assoc();
         Correo: <input type="email" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>"><br>
         <input type="submit" value="Guardar cambios">
 </form>
+
+	<form method="POST" action="gestionar_perfil.php">
+                <input type="submit" value="Volver">
+            </form>
     </body>
 </html>
