@@ -68,8 +68,12 @@ $fila = $resultado->fetch_assoc();
     <form action='ver_carrito.php' method='post'>
         <input type='submit' value='Volver'>
     </form>
-<?php } else { ?>
+<?php } else if ($origen == "perfil") { ?>
     <form action='gestionar_perfil.php' method='post'>
+        <input type='submit' value='Volver'>
+    </form>
+<?php } else { ?>
+    <form action='resumen_compra.php' method='post'>
         <input type='submit' value='Volver'>
     </form>
 <?php }

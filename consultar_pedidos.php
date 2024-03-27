@@ -59,15 +59,14 @@
 
             while ($fila = $resultado->fetch_assoc()) {
                 echo "<tr>
-
-                        <td>".$fila['numero']."</td>
-                        <td>".$fila['descuento']."%</td>
-                        <td>".$fila['subtotal']."€</td>
-                        <td>".number_format($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)),2)."€</td>
-                        <td>
-                            <a href='detalles_pedido.php?id=".$fila['id_pedido']."'>Detalles</a>
-                        </td>
-                    </tr>";
+                <td>" . rtrim(preg_replace('/\B(?=(\d{4})+(?!\d))/', ' ', $fila['numero'])) . "</td>
+                <td>" . $fila['descuento'] . "%</td>
+                <td>" . $fila['subtotal'] . "€</td>
+                <td>" . number_format($fila['subtotal'] - ($fila['subtotal'] * ($fila['descuento'] / 100)), 2) . "€</td>
+                <td>
+                    <a href='detalles_pedido.php?id=" . $fila['id_pedido'] . "'>Detalles</a>
+                </td>
+              </tr>";
             }
 
             $conexion->close();

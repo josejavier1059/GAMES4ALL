@@ -69,7 +69,7 @@
                 echo "<tr>
                         <td style='min-width: 40px;'>".$fila['id_pedido']."</td>
                         <td>".$fila['alias']."</td>
-                        <td>".$fila['numero']."</td>
+                        <td>" . rtrim(preg_replace('/\B(?=(\d{4})+(?!\d))/', ' ', $fila['numero'])) . "</td>
                         <td>".$fila['descuento']."%</td>
                         <td>".$fila['subtotal']."€</td>
                         <td>".number_format($fila['subtotal']-($fila['subtotal']*($fila['descuento'] / 100)),2)."€</td>

@@ -44,7 +44,7 @@
         <div id="header">
         <h1>GAMES4ALL</h1>
         <h4>¡Consigue tu juego preferido al mejor precio!</h4>
-        <?php if ($_COOKIE['rol'] !== 'administrador') { ?>
+        <?php if ($roles !== 'administrador') { ?>
         <div id="cart-icon">
             <a href="ver_carrito.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #63E6BE;"></i></a>
         </div>

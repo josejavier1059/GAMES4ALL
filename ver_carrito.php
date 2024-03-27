@@ -63,8 +63,9 @@ if ($resultado->num_rows > 0) {
             <input type='submit' value='Seguir Comprando'>
           </form>";
 } else {
-    echo "El carrito está vacío.";
-    echo "<form action='buscar_juegos.php' method='post'>
+    echo "<h2>Carrito de Compras</h2>
+          El carrito está vacío.
+          <form action='buscar_juegos.php' method='post'>
             <input type='submit' value='Comenzar a buscar Juegos'>
           </form>";
 }

@@ -133,6 +133,7 @@ $conexion->close();
 <body>
     <h2>Muchas gracias por tu compra</h2>
     <p>¡Esperamos que disfrutes de tus productos!</p>
+    <p>Encontrarás las claves de tus juegos digitales en tu Biblioteca y la fecha de entrega de los físicos en tus Pedidos</p>
 
     <form action="menus.php" method="post">
         <input type="submit" value="Volver al Menú">

@@ -104,16 +104,15 @@ if (isset($_GET['id_usuario'])) {
 
     if (mysqli_num_rows($resultado) > 0) {
         echo "<table>";
-        echo "<tr><th>ID Tarjeta</th><th>Número</th><th>Caducidad</th><th>Titular</th></tr>";
+        echo "<tr><th>ID Tarjeta</th><th>Número</th><th>Caducidad</th><th>Titular</th><th></th></tr>";
         while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($fila['id_tarjeta']) . "</td>";
-            echo "<td>" . htmlspecialchars($fila['numero']) . "</td>";
-            echo "<td>" . htmlspecialchars($fila['caducidad']) . "</td>";
-            echo "<td>" . htmlspecialchars($fila['titular']) . "</td>";
-            echo "<td><a href='editar_tarjeta.php?id_tarjeta=" . $fila['id_tarjeta'] . "'>Editar</a></td>";
-        
-            echo "</tr>";
+            echo "<tr>
+                <td>" . $fila['id_tarjeta'] . "</td>
+                <td>" . rtrim(preg_replace('/\B(?=(\d{4})+(?!\d))/', ' ', $fila['numero'])) . "</td>
+                <td>" . $fila['caducidad'] . "</td>
+                <td>" . $fila['titular'] . "</td>
+                <td><a href='editar_tarjeta.php?id_tarjeta=" . $fila['id_tarjeta'] . "'>Editar</a></td>
+                </tr>";
         }
         echo "</table>";
     } else {

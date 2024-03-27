@@ -25,12 +25,14 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
             
         echo "<h1>".$juego['titulo']."</h1>
             <p>Plataforma: ".$juego['plataforma']."</p>
-            <p>Precio: ".$juego['precio']."€</p>
-            <p>Precio rebajado: ".$juego['precio_rebajado']."€</p>
-            <p>Rebaja: ".$juego['rebaja']."%</p>
+            <p>Precio: "; 
+            if ($juego['rebaja'] > 0) {
+                echo "<del>" . number_format($juego['precio'], 2, ',', '.') . "€</del>  " . str_repeat("&nbsp;", 1) . "-" . $juego['rebaja'] . "%". str_repeat("&nbsp;", 2);
+            }
+            echo number_format($juego['precio_rebajado'], 2, ',', '.') . "€</p>
             <p>Formato: ".($juego['formato'] == 0 ? "Físico" : "Digital")."</p>
             <p>Género: ".$juego['genero']."</p>
-            <p>Descripción: ".$juego['descripcion']."</p>
+            <p>".$juego['descripcion']."</p>
             <img src='".$juego['imagen']."' style='width: 200px; height: 200px;'>";
 
         echo"<br><br>";

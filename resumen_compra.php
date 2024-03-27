@@ -58,11 +58,11 @@ $resultado_descuentos = $conexion->query($sql_descuentos);
 <body>
     <h2>Resumen de Compra</h2>
 
-    <h3>Juegos Seleccionados en el Carrito:</h3>
+    <h3>Juegos en el Carrito:</h3>
     <?php if ($resultado_juegos->num_rows > 0): ?>
     <ul>
         <?php while ($fila_juegos = $resultado_juegos->fetch_assoc()): ?>
-            <li><?php echo $fila_juegos["titulo"]; ?> - <?php echo $fila_juegos["plataforma"]; ?> - <?php echo $fila_juegos["precio"]; ?>€ - <?php echo ($fila_juegos["formato"] == 0 ? "Físico" : "Digital"); ?></li>
+            <li><?php echo $fila_juegos["titulo"]; ?> (<?php echo $fila_juegos["plataforma"]; ?>) - <?php echo $fila_juegos["precio"]; ?>€ | <?php echo ($fila_juegos["formato"] == 0 ? "Físico" : "Digital"); ?></li>
         <?php endwhile; ?>
     </ul>
     <?php endif; ?>
@@ -77,14 +77,19 @@ $resultado_descuentos = $conexion->query($sql_descuentos);
             Ciudad: <?php echo $fila_direccion["ciudad"]; ?><br>
             Dirección: <?php echo $fila_direccion["direccion"]; ?><br>
             Código Postal: <?php echo $fila_direccion["cod_postal"]; ?><br>
+            <form action="datos_direccion.php?origen=resumen"  method="post">
+                <input type="submit" value="Cambiar Dirección">
+            </form>
+
+
         </p>
     <?php endif; ?>
 
     <h3>Tarjeta Utilizada:</h3>
     <?php if ($fila_tarjeta): ?>
         <p>
-            Número de Tarjeta: <?php echo $fila_tarjeta["numero"]; ?><br>
-            Nombre del Titular: <?php echo $fila_tarjeta["titular"]; ?><br>
+            Número de Tarjeta: <?php echo rtrim(preg_replace('/\B(?=(\d{4})+(?!\d))/', ' ', $fila_tarjeta['numero'])); ?><br>
+            Titular: <?php echo $fila_tarjeta["titular"]; ?><br>
             Fecha de Expiración: <?php echo $caducidad; ?><br>
         </p>
     <?php endif; ?>
@@ -118,6 +123,8 @@ $resultado_descuentos = $conexion->query($sql_descuentos);
     <form action="compra_realizada.php" method="post">
         <input type="submit" value="Comprar">
     </form>
+
+    <br>
 
     <form action="introducir_tarjeta.php" method="post">
         <input type="submit" value="Volver">
