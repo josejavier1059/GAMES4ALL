@@ -26,6 +26,18 @@
                 <br><br>
                 Nombre Completo: 
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" required>
+                <br><br>
+                Pais: 
+                <input type="text" name="pais" id="pais" placeholder="Pais de nacimiento" required>
+                <br><br>
+                Ciudad: 
+                <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required>
+                <br><br>
+                Direccion:
+                <input type="text" name="direccion" id="direccion" placeholder="Direccion" required>
+                <br><br>
+                Codigo postal: 
+                <input type="text" name="cod_postal" id="cod_postal" placeholder="Codigo postal" required>
                 <br><br><br>
                 <input type="submit" value="Confirmar">
             </form>

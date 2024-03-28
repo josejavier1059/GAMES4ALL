@@ -35,7 +35,7 @@
 
     ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 20%; height: 450px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 20%; height: 850px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
             <h3>Perfil de <?php echo $alias ?></h3>
             <h6>Nombre de usuario: <?php echo $alias ?></h6>
             <h6>Contraseña: <?php echo $pass ?></h6>

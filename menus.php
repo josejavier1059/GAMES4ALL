@@ -108,8 +108,8 @@
                     <input type="submit" value="Mostrar perfil">
                 </form>
 
-                <form method="post" action="usuario_lista_tarjetas.php">
-                    <input type="submit" value="Mostrar tarjetas">
+                <form method="post" action="gestionar_tarjetas.php">
+                    <input type="submit" value="Gestionar tarjetas">
                 </form>
 
                 <form method="post" action="index.php">

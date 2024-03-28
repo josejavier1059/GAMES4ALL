@@ -243,7 +243,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `rol`, `alias`, `password`, `correo`, `nombre`, `pais`, `ciudad`, `direccion`, `cod_postal`) VALUES
 (1, 'administrador', 'admin', 'admin', 'admin.admin@gmail.com', 'Admin Istrator', 'España', 'AdminCity', 'C/ Administracion Nº 66', '11234'),
-(2, 'usuario', 'pepe', 'pepito2024', 'pepeperez10@gmail.com', '', 'PepoWorld', 'PepoCity', 'Avenida de los Pepes nº 3', '33102'),
+(2, 'usuario', 'pepe', 'pepito2024', 'pepeperez10@gmail.com', 'Jose Luis Olmo', 'PepoWorld', 'PepoCity', 'Avenida de los Pepes nº 3', '33102'),
 (3, 'usuario', 'Manuhima', 'poipoi', 'manuhima1@gmail.com', 'Manuel Hidalgo', 'España', 'Jerez de la Frontera', 'cerca de mi casa', '11222'),
 (5, 'usuario', 'a', 'b', 'c@c', 'x', '', '', '', '');
 
