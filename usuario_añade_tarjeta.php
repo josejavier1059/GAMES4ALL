@@ -1,20 +1,15 @@
 <?php
-$conexion = mysqli_connect("localhost", "root", "", "games4all") or die("Error al conectar a la base de datos.");
-
 if (!isset($_COOKIE['alias'])) {
     header('Location: index.php');
     exit();
 }
-
-$alias = $_COOKIE['alias'];
-
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Gestionar Tarjetas - G4A</title>
+    <title>Añadir Nueva Tarjeta - G4A</title>
     <style>
         body {
             background: url('fondo.png') no-repeat center center fixed;
@@ -48,7 +43,7 @@ $alias = $_COOKIE['alias'];
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin: 10px; /* Añadido para separar los botones */
+            margin: 10px; 
         }
 
         input[type="submit"]:hover {
@@ -58,22 +53,20 @@ $alias = $_COOKIE['alias'];
 </head>
 <body>
 
-<div id="header">
-    <h2>Gestionar Tarjetas</h2>
-</div>
+<h2>Añadir Nueva Tarjeta</h2>
 
-<form action="usuario_añade_tarjeta.php" method="post">
+<form action="procesar_usuario_añade_tarjeta.php" method="post">
+    <label for="numero">Número de Tarjeta:</label><br>
+    <input type="text" id="numero" name="numero" required><br>
+
+    <label for="caducidad">Caducidad (YYYY-MM-DD):</label><br>
+    <input type="date" id="caducidad" name="caducidad" required><br>
+
+    <label for="titular">Titular:</label><br>
+    <input type="text" id="titular" name="titular" required><br>
+
     <input type="submit" value="Añadir Tarjeta">
 </form>
-
-<form action="usuario_elimina_tarjeta.php" method="post">
-    <input type="submit" value="Eliminar Tarjeta">
-</form>
-
-<form action="usuario_lista_tarjeta.php" method="post">
-    <input type="submit" value="Editar Tarjeta">
-</form>
-
 
 </body>
 </html>
