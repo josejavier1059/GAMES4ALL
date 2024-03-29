@@ -62,7 +62,7 @@
                 <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($id); ?>">
                 <input type="submit" value="Editar dirección">
             </form>
-                <form method="POST" action="eliminar_usuario.php">
+                <form method="POST" action="borrar_cuenta.php">
                     <input type="submit" value="Borrar cuenta">
                 </form> 
 <?php       }

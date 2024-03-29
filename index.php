@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body style="background-color: #4CC5B0; text-align: center; color: #000000;">
+<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;">
     <div id="header">
         <h1>GAMES4ALL</h1>
         <h4>¡Consigue tu juego preferido al mejor precio!</h4>
