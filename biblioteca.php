@@ -14,7 +14,7 @@
     $alias = $_COOKIE['alias'];
     ?>
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 20%; height: 450px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 55%; height: 800px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
           <?php
 $conexion = new mysqli("localhost", "root", "", "games4all");
 

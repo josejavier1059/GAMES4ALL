@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Tarjeta</title>
+</head>
+<body>
+
+<h2>Introduce los detalles de tu tarjeta:</h2>
 <?php
 $conexion = new mysqli("localhost", "root", "", "games4all");
 
@@ -67,15 +75,6 @@ if (isset($_POST["numero_tarjeta"]) && isset($_POST["nombre_titular"]) && isset(
 
 $conexion->close();
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulario de Tarjeta</title>
-</head>
-<body>
-
-<h2>Introduce los detalles de tu tarjeta:</h2>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     Número de Tarjeta (16 dígitos): <input type="text" name="numero_tarjeta" required pattern="\d{16}" required><br><br>
     Nombre del Titular: <input type="text" name="nombre_titular" required><br><br>
