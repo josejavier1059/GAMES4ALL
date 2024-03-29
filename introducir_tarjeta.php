@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulario de Tarjeta</title>
+    <meta charset="utf-8">
+    <title>G4A</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
-<body>
-
+    
+<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;">
+    <div style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;"
+<h1>Formulario de Tarjeta</h1>
 <h2>Introduce los detalles de tu tarjeta:</h2>
 <?php
 $conexion = new mysqli("localhost", "root", "", "games4all");
@@ -86,6 +90,6 @@ $conexion->close();
 <form action="ver_carrito.php" method="post">
     <input type="submit" value="Volver">
 </form>
-
+</div>
 </body>
 </html>
