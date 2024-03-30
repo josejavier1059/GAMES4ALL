@@ -25,6 +25,9 @@
             setcookie("correo", $email, time() - 1, "/");
                             
             exit();
+            
+            $conexion->close();
+
         }
 
         /*

@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>G4A</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+    
+<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;">
+    <div style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;"
+<h1>Formulario de Tarjeta</h1>
+<h2>Introduce los detalles de tu tarjeta:</h2>
 <?php
 $conexion = new mysqli("localhost", "root", "", "games4all");
 
@@ -67,15 +79,6 @@ if (isset($_POST["numero_tarjeta"]) && isset($_POST["nombre_titular"]) && isset(
 
 $conexion->close();
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulario de Tarjeta</title>
-</head>
-<body>
-
-<h2>Introduce los detalles de tu tarjeta:</h2>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     Número de Tarjeta (16 dígitos): <input type="text" name="numero_tarjeta" required pattern="\d{16}" required><br><br>
     Nombre del Titular: <input type="text" name="nombre_titular" required><br><br>
@@ -87,6 +90,6 @@ $conexion->close();
 <form action="ver_carrito.php" method="post">
     <input type="submit" value="Volver">
 </form>
-
+</div>
 </body>
 </html>
