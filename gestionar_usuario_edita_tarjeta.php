@@ -20,11 +20,11 @@ if (isset($_POST['id_tarjeta'], $_POST['numero'], $_POST['caducidad'])) {
     $queryActualizar = "UPDATE tarjeta SET numero = '$numero', caducidad = '$caducidad' WHERE id_tarjeta = '$idTarjeta'";
     
     if (mysqli_query($conexion, $queryActualizar)) {
-        echo "<script>alert('Tarjeta actualizada correctamente.'); window.location.href='usuario_lista_tarjeta.php';</script>";
+        echo "<script>alert('Tarjeta actualizada correctamente.'); window.location.href='gestionar_tarjetas.php';</script>";
     } else {
         echo "<script>alert('Error al actualizar la tarjeta: " . mysqli_error($conexion) . "'); window.location.href='usuario_edita_tarjeta.php?id_tarjeta=$idTarjeta';</script>";
     }
 } else {
-    header('Location: usuario_lista_tarjeta.php');
+    header('Location: gestionar_tarjetas.php');
 }
 ?>

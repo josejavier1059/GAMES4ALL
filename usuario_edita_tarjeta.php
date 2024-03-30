@@ -97,5 +97,9 @@ if (!$tarjeta) {
     <input type="submit" value="Aceptar">
 </form>
 
+
+<form action="gestionar_tarjetas.php">
+    <input type="submit" value="Volver" />
+</form>
 </body>
 </html>

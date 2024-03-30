@@ -68,5 +68,11 @@ if (!isset($_COOKIE['alias'])) {
     <input type="submit" value="Añadir Tarjeta">
 </form>
 
+
+<form action="gestionar_tarjetas.php">
+    <input type="submit" value="Volver" />
+</form>
+
+
 </body>
 </html>
