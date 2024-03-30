@@ -30,7 +30,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
     }
 
     $alias = $_COOKIE['alias'];
+    $rol = $_COOKIE['rol'];
     
+
+
     $consultaSQL = "SELECT juego.id_juego, juego.plataforma, juego.titulo, juego.precio, juego.rebaja, juego.formato, juego.stock, info_juego.genero, info_juego.descripcion, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio_rebajado, CONCAT('images/', info_juego.imagen) AS imagen FROM juego INNER JOIN info_juego ON juego.titulo = info_juego.titulo_juego WHERE id_juego = $id_juego"; 
     $resultado = mysqli_query($conexion, $consultaSQL);
     
@@ -62,7 +65,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
 
         $consultaSQL = "SELECT * FROM carrito WHERE id_usuario = $id_usuario AND id_juego = $id_juego";
         $resultado = mysqli_query($conexion, $consultaSQL);
-
+    if($rol == "usuario"){
         if ($comprado) {
             echo "<p>Ya tienes este juego en tu biblioteca.</p>";
         } else {
@@ -86,7 +89,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                 }
             }
         }
-                
+    }
         echo "<form method='POST' action='buscar_juegos.php'>
             <input type='submit' value='Volver'>
             </form>";
