@@ -33,11 +33,12 @@ if ($resultadoUsuario->num_rows > 0) {
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Gestionar Tarjetas - G4A</title>
+    <meta charset="utf-8">
     <style>
         body {
             background: url('fondo.png') no-repeat center center fixed;
+            background-color: #4CC5B0;
             background-size: contain;
             text-align: center;
             color: #4CC5B0; 
@@ -47,8 +48,15 @@ if ($resultadoUsuario->num_rows > 0) {
             background-color: #173E59;
             text-align: center;
             color: #ffffff;
-            padding: 20px;
+            padding: 35px;
             margin-bottom: 20px;
+        }
+        #header2 {
+            text-align: center;
+            color: #000000;
+            padding: 35px;
+            margin-bottom: 20px;
+            margin-left: -500px;
         }
         .tarjeta-info {
             margin: 10px auto;
@@ -76,16 +84,19 @@ if ($resultadoUsuario->num_rows > 0) {
         }
     </style>
 </head>
+<div id="header">
+    <h1>GAMES4ALL</h1>
+    <h4>¡Consigue tu juego preferido al mejor precio!</h4>
+</div>
 <body>
 
-<div id="header">
-    <h2>Gestionar Tarjetas</h2>
-</div>
-
+<div id="header2">
+<h2>TUS TARJETAS</h2>
+<br>
 <form action="usuario_añade_tarjeta.php" method="post">
     <input type="submit" value="Añadir Tarjeta">
 </form>
-
+<br>
 <?php
 if (isset($resultadoTarjetas) && $resultadoTarjetas->num_rows > 0) {
     while ($tarjeta = $resultadoTarjetas->fetch_assoc()) {
@@ -97,16 +108,16 @@ if (isset($resultadoTarjetas) && $resultadoTarjetas->num_rows > 0) {
         echo "<input type='submit' value='Eliminar'>";
         echo "</form>";
         echo "</div>";
+        ?><br><?php
     }
 } else {
     echo "No tienes tarjetas registradas.";
 }
 ?>
-
-
+<br>
 <form action="menus.php">
     <input type="submit" value="Volver" />
 </form>
-
+</div>
 </body>
 </html>
