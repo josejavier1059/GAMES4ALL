@@ -120,6 +120,7 @@
    
         <?php
             }
+            $conexion->close();
         ?>
             </div>
     </body>
