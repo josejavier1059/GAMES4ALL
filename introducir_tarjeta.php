@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
     
-<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;">
+<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;margin-top: 250px;background-color: #4CC5B0; text-align: center; color: #000000;">
     <div style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;"
 <h1>Formulario de Tarjeta</h1>
 <h2>Introduce los detalles de tu tarjeta:</h2>

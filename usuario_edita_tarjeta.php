@@ -33,18 +33,26 @@ if (!$tarjeta) {
     body {
         background: url('fondo.png') no-repeat center center fixed;
         background-size: contain;
+        background-color: #4CC5B0;
         text-align: center;
         color: #4CC5B0; 
         margin: 0;
     }
 
     #header {
-        background-color: #173E59;
-        text-align: center;
-        color: #ffffff;
-        padding: 20px;
-        margin-bottom: 20px;
+            background-color: #173E59;
+            text-align: center;
+            color: #ffffff;
+            padding: 35px;
+            margin-bottom: 20px;
     }
+    #header2 {
+            text-align: center;
+            color: #000000;
+            padding: 35px;
+            margin-bottom: 20px;
+            margin-left: -500px;
+        }
 
     form {
         margin: auto;
@@ -81,8 +89,12 @@ if (!$tarjeta) {
     }
 </style>
 </head>
+<div id="header">
+    <h1>GAMES4ALL</h1>
+    <h4>¡Consigue tu juego preferido al mejor precio!</h4>
+</div>
 <body>
-
+<div id="header2">
 <h2>Editar Tarjeta</h2>
 
 <form action="gestionar_usuario_edita_tarjeta.php" method="post">
@@ -97,9 +109,10 @@ if (!$tarjeta) {
     <input type="submit" value="Aceptar">
 </form>
 
-
+<br><br>
 <form action="gestionar_tarjetas.php">
     <input type="submit" value="Volver" />
 </form>
+</div>
 </body>
 </html>

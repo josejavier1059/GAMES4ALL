@@ -11,7 +11,7 @@
     </head>
 
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 30%; height: 700px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 60%; height: 500px;margin-top: 0px; background-color: #4CC5B0; color: #000000;font-size: 25px;">
             <?php
 $conexion = new mysqli("localhost", "root", "", "games4all");
 

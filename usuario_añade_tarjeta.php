@@ -14,6 +14,7 @@ if (!isset($_COOKIE['alias'])) {
         body {
             background: url('fondo.png') no-repeat center center fixed;
             background-size: contain;
+            background-color: #4CC5B0;
             text-align: center;
             color: #4CC5B0; 
             margin: 0;
@@ -23,8 +24,15 @@ if (!isset($_COOKIE['alias'])) {
             background-color: #173E59;
             text-align: center;
             color: #ffffff;
-            padding: 20px;
+            padding: 35px;
             margin-bottom: 20px;
+        }
+        #header2 {
+            text-align: center;
+            color: #000000;
+            padding: 35px;
+            margin-bottom: 20px;
+            margin-left: -500px;
         }
 
         form {
@@ -51,8 +59,12 @@ if (!isset($_COOKIE['alias'])) {
         }
     </style>
 </head>
+<div id="header">
+    <h1>GAMES4ALL</h1>
+    <h4>¡Consigue tu juego preferido al mejor precio!</h4>
+</div>
 <body>
-
+<div id="header2">
 <h2>Añadir Nueva Tarjeta</h2>
 
 <form action="procesar_usuario_añade_tarjeta.php" method="post">
@@ -68,11 +80,11 @@ if (!isset($_COOKIE['alias'])) {
     <input type="submit" value="Añadir Tarjeta">
 </form>
 
-
+<br><br>
 <form action="gestionar_tarjetas.php">
     <input type="submit" value="Volver" />
 </form>
 
-
+</div>
 </body>
 </html>
