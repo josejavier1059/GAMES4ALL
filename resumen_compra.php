@@ -26,7 +26,7 @@ if (isset($_COOKIE["descuento"])) {
 $id_usuario = $_COOKIE["id"];
 $num_tar = $_COOKIE["numero_tarjeta"];
 
-$sql_juegos = "SELECT juego.titulo, juego.plataforma, juego.precio, juego.formato
+$sql_juegos = "SELECT juego.titulo, juego.plataforma, ROUND(juego.precio - juego.precio * juego.rebaja / 100, 2) AS precio, juego.formato
                FROM carrito
                INNER JOIN juego ON carrito.id_juego = juego.id_juego
                WHERE carrito.id_usuario = $id_usuario";

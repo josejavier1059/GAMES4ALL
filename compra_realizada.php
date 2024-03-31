@@ -72,7 +72,7 @@ if ($juegos_fisicos_en_carrito) {
 }
 
 $sql_insert_pedido = "INSERT INTO pedido (id_usuario, id_tarjeta, descuento, subtotal, fecha) 
-                      VALUES ($id_usuario, $id_tarjeta, $descuento, (SELECT SUM(precio) FROM juego WHERE id_juego IN (SELECT id_juego FROM carrito WHERE id_usuario = $id_usuario)), '$fecha_actual')";
+                      VALUES ($id_usuario, $id_tarjeta, $descuento, (SELECT SUM(ROUND(precio - precio * rebaja / 100, 2)) FROM juego WHERE id_juego IN (SELECT id_juego FROM carrito WHERE id_usuario = $id_usuario)), '$fecha_actual')";
 if ($conexion->query($sql_insert_pedido) === TRUE) {
 
     $id_pedido = $conexion->insert_id;
