@@ -9,6 +9,7 @@ if (!isset($_COOKIE['alias'])) {
 
 if (isset($_POST['id_tarjeta'], $_POST['numero'], $_POST['caducidad'])) {
     $idTarjeta = mysqli_real_escape_string($conexion, $_POST['id_tarjeta']);
+    $titular = mysqli_real_escape_string($conexion, $_POST['titular']);
     $numero = mysqli_real_escape_string($conexion, $_POST['numero']);
     $caducidad = mysqli_real_escape_string($conexion, $_POST['caducidad']);
     
@@ -17,7 +18,7 @@ if (isset($_POST['id_tarjeta'], $_POST['numero'], $_POST['caducidad'])) {
         exit();
     }
     
-    $queryActualizar = "UPDATE tarjeta SET numero = '$numero', caducidad = '$caducidad' WHERE id_tarjeta = '$idTarjeta'";
+    $queryActualizar = "UPDATE tarjeta SET numero = '$numero', titular = '$titular', caducidad = '$caducidad' WHERE id_tarjeta = '$idTarjeta'";
     
     if (mysqli_query($conexion, $queryActualizar)) {
         echo "<script>alert('Tarjeta actualizada correctamente.'); window.location.href='gestionar_tarjetas.php';</script>";

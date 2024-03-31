@@ -100,9 +100,12 @@ if (!$tarjeta) {
 <form action="gestionar_usuario_edita_tarjeta.php" method="post">
     <input type="hidden" name="id_tarjeta" value="<?php echo $idTarjeta; ?>">
     
+    <label for="numero">Titular:</label><br>
+    <input type="text" id="titular" name="titular" value="<?php echo $tarjeta['titular']; ?>" required><br>
+    
     <label for="numero">Número de Tarjeta:</label><br>
     <input type="text" id="numero" name="numero" value="<?php echo $tarjeta['numero']; ?>" required><br>
-    
+
     <label for="caducidad">Caducidad (YYYY-MM-DD):</label><br>
     <input type="date" id="caducidad" name="caducidad" value="<?php echo $tarjeta['caducidad']; ?>" required><br>
     
