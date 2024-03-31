@@ -109,7 +109,7 @@ if (isset($_GET['id_usuario'])) {
             echo "<tr>
                 <td>" . $fila['id_tarjeta'] . "</td>
                 <td>" . rtrim(preg_replace('/\B(?=(\d{4})+(?!\d))/', ' ', $fila['numero'])) . "</td>
-                <td>" . $fila['caducidad'] . "</td>
+                <td>" . date("m/Y", strtotime($fila['caducidad'])) . "</td>
                 <td>" . $fila['titular'] . "</td>
                 <td><a href='editar_tarjeta.php?id_tarjeta=" . $fila['id_tarjeta'] . "'>Editar</a></td>
                 </tr>";

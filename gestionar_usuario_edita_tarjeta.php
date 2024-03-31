@@ -29,7 +29,7 @@ if (isset($_POST['id_tarjeta'], $_POST['numero'], $_POST['caducidad'])) {
     $fecha_actual = date("Y-m-d");
         
     if (strtotime($caducidad) < strtotime($fecha_actual)) {
-        header("Location: usuario_edita_tarjeta.php?error=FechaError");
+        header("Location: usuario_edita_tarjeta.php?id_tarjeta=" . $idTarjeta . "&?error=FechaError");
         exit();
     }
 

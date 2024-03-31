@@ -8,10 +8,21 @@ if (!isset($_COOKIE['alias']) || !isset($_COOKIE['rol'])) {
 
 $alias = $_COOKIE['alias'];
 $rol = $_COOKIE['rol'];
+$id_usuario = $_COOKIE['id'];
 
 if ($rol !== 'administrador') {
     header('Location: index.php');
     exit();
+}
+
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+    if ($error == 'FechaError') {
+        echo 'La tarjeta está caducada o la fecha no es válida.';
+    }
+    if ($error == 'TarjetaYaExiste') {
+        echo 'La tarjeta ya existe en la base de datos.';
+    }
 }
 
 if (isset($_GET['id_tarjeta'])) {
@@ -21,6 +32,26 @@ if (isset($_GET['id_tarjeta'])) {
         $numero = mysqli_real_escape_string($conexion, $_POST['numero']);
         $caducidad = mysqli_real_escape_string($conexion, $_POST['caducidad']);
         $titular = mysqli_real_escape_string($conexion, $_POST['titular']);
+
+        $sql_check = "SELECT * FROM tarjeta WHERE numero = '$numero'";
+        $result = $conexion->query($sql_check);
+    
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if ($row['id_tarjeta'] != $id_tarjeta) {
+                    header("Location: editar_tarjeta.php?id_tarjeta=" . $id_tarjeta . "&?error=TarjetaYaExiste");
+                    exit();
+                }
+            }
+        }
+    
+        $caducidad = "20" . substr($caducidad, 3, 2) . "-" . substr($caducidad, 0, 2) . "-01";
+        $fecha_actual = date("Y-m-d");
+            
+        if (strtotime($caducidad) < strtotime($fecha_actual)) {
+            header("Location: editar_tarjeta.php?id_tarjeta=" . $id_tarjeta . "&?error=FechaError");
+            exit();
+        }
 
         $consultaUpdate = "UPDATE tarjeta SET numero = '$numero', caducidad = '$caducidad', titular = '$titular' WHERE id_tarjeta = '$id_tarjeta'";
         if (mysqli_query($conexion, $consultaUpdate)) {
@@ -104,16 +135,17 @@ if (isset($_GET['id_tarjeta'])) {
         }
     </style>
 </head>
-        <body>
+        <body style="background-color: #4CC5B0; color: #000000;">
+
             <form action="" method="post">
                 <label for="numero">Número de Tarjeta:</label><br>
                 <input type="text" id="numero" name="numero" value="<?php echo htmlspecialchars($fila['numero']); ?>" required><br>
 
-                <label for="caducidad">Caducidad:</label><br>
-                <input type="text" id="caducidad" name="caducidad" value="<?php echo htmlspecialchars($fila['caducidad']); ?>" required><br>
-
                 <label for="titular">Titular:</label><br>
                 <input type="text" id="titular" name="titular" value="<?php echo htmlspecialchars($fila['titular']); ?>" required><br>
+
+                <label for="caducidad">Caducidad (MM/YY):</label><br>
+                <input type="text" id="caducidad" name="caducidad" value="<?php echo date("m/y", strtotime($fila['caducidad'])); ?>" required pattern="\d{2}\/\d{2}"><br>
 
                 <input type="submit" name="actualizar" value="Actualizar Tarjeta">
             </form>

@@ -7,7 +7,6 @@ if (!isset($_COOKIE['alias'])) {
     exit();
 }
 
-// Verificar que se haya proporcionado un ID de tarjeta
 if (!isset($_GET['id_tarjeta'])) {
     echo "No se especificó una tarjeta para editar.";
     exit;
