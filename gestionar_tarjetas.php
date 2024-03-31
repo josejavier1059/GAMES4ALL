@@ -101,7 +101,7 @@ if ($resultadoUsuario->num_rows > 0) {
 if (isset($resultadoTarjetas) && $resultadoTarjetas->num_rows > 0) {
     while ($tarjeta = $resultadoTarjetas->fetch_assoc()) {
         echo "<div class='tarjeta-info'>";
-        echo "Tarjeta: " . $tarjeta['numero'] . " - Caducidad: " . date("m/Y", strtotime($tarjeta['caducidad']));
+        echo "Tarjeta: " . rtrim(preg_replace('/\B(?=(\d{4})+(?!\d))/', ' ', $tarjeta['numero'])) . " - Caducidad: " . date("m/Y", strtotime($tarjeta['caducidad']));
         echo " <a href='usuario_edita_tarjeta.php?id_tarjeta=" . $tarjeta['id_tarjeta'] . "'><button>Modificar</button></a>";
         echo " <form style='display:inline' action='procesar_usuario_elimina_tarjeta.php' method='post'>";
         echo "<input type='hidden' name='id_tarjeta' value='" . $tarjeta['id_tarjeta'] . "'>";

@@ -3,6 +3,16 @@ if (!isset($_COOKIE['alias'])) {
     header('Location: index.php');
     exit();
 }
+
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+    if ($error == 'FechaError') {
+        //echo 'La tarjeta está caducada o la fecha no es válida.';
+    }
+    if ($error == 'TarjetaYaExiste') {
+        //echo 'La tarjeta ya existe en la base de datos.';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -69,13 +79,13 @@ if (!isset($_COOKIE['alias'])) {
 
 <form action="procesar_usuario_añade_tarjeta.php" method="post">
     <label for="numero">Número de Tarjeta:</label><br>
-    <input type="text" id="numero" name="numero" required><br>
-
-    <label for="caducidad">Caducidad (YYYY-MM-DD):</label><br>
-    <input type="date" id="caducidad" name="caducidad" required><br>
+    <input type="text" id="numero" name="numero" required pattern="\d{16}"><br>
 
     <label for="titular">Titular:</label><br>
     <input type="text" id="titular" name="titular" required><br>
+
+    <label for="caducidad">Caducidad (MM/YY):</label><br>
+    <input type="text" id="caducidad" name="caducidad" placeholder="MM/YY" required pattern="\d{2}\/\d{2}"><br>
 
     <input type="submit" value="Añadir Tarjeta">
 </form>

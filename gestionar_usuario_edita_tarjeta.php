@@ -12,11 +12,27 @@ if (isset($_POST['id_tarjeta'], $_POST['numero'], $_POST['caducidad'])) {
     $titular = mysqli_real_escape_string($conexion, $_POST['titular']);
     $numero = mysqli_real_escape_string($conexion, $_POST['numero']);
     $caducidad = mysqli_real_escape_string($conexion, $_POST['caducidad']);
-    
-    if (!preg_match('/^\d{16}$/', $numero)) {
-        echo "<script>alert('El número de tarjeta no es válido.'); window.location.href='usuario_edita_tarjeta.php?id_tarjeta=$idTarjeta';</script>";
+
+    $sql_check = "SELECT * FROM tarjeta WHERE numero = '$numero'";
+    $result = $conexion->query($sql_check);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ($row['id_tarjeta'] != $idTarjeta) {
+                header("Location: usuario_edita_tarjeta.php?id_tarjeta=" . $idTarjeta . "&?error=TarjetaYaExiste");
+                exit();
+            }
+        }
+    }
+
+    $caducidad = "20" . substr($caducidad, 3, 2) . "-" . substr($caducidad, 0, 2) . "-01";
+    $fecha_actual = date("Y-m-d");
+        
+    if (strtotime($caducidad) < strtotime($fecha_actual)) {
+        header("Location: usuario_edita_tarjeta.php?error=FechaError");
         exit();
     }
+
     
     $queryActualizar = "UPDATE tarjeta SET numero = '$numero', titular = '$titular', caducidad = '$caducidad' WHERE id_tarjeta = '$idTarjeta'";
     

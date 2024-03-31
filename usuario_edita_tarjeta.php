@@ -22,6 +22,16 @@ if (!$tarjeta) {
     echo "La tarjeta especificada no existe.";
     exit;
 }
+
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+    if ($error == 'FechaError') {
+        //echo 'La tarjeta está caducada o la fecha no es válida.';
+    }
+    if ($error == 'TarjetaYaExiste') {
+        //echo 'La tarjeta ya existe en la base de datos.';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -99,15 +109,15 @@ if (!$tarjeta) {
 
 <form action="gestionar_usuario_edita_tarjeta.php" method="post">
     <input type="hidden" name="id_tarjeta" value="<?php echo $idTarjeta; ?>">
+
+    <label for="numero">Número de Tarjeta:</label><br>
+    <input type="text" id="numero" name="numero" value="<?php echo $tarjeta['numero']; ?>" required pattern="\d{16}"><br>
     
     <label for="numero">Titular:</label><br>
     <input type="text" id="titular" name="titular" value="<?php echo $tarjeta['titular']; ?>" required><br>
-    
-    <label for="numero">Número de Tarjeta:</label><br>
-    <input type="text" id="numero" name="numero" value="<?php echo $tarjeta['numero']; ?>" required><br>
 
-    <label for="caducidad">Caducidad (YYYY-MM-DD):</label><br>
-    <input type="date" id="caducidad" name="caducidad" value="<?php echo $tarjeta['caducidad']; ?>" required><br>
+    <label for="caducidad">Caducidad (MM/YY):</label><br>
+    <input type="text" id="caducidad" name="caducidad" value="<?php echo date("m/y", strtotime($tarjeta['caducidad'])); ?>" required pattern="\d{2}\/\d{2}"><br>
     
     <input type="submit" value="Aceptar">
 </form>
