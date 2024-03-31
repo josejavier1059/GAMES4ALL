@@ -130,7 +130,7 @@ $conexion->close();
 <head>
     <title>Agradecimiento por tu Compra</title>
 </head>
-<body>
+<body style="background: url('fondo.png') no-repeat center center fixed; background-size: cover; margin-top: 200px; background-color: #4CC5B0; text-align: left; color: #000000;">
     <h2>Muchas gracias por tu compra</h2>
     <p>¡Esperamos que disfrutes de tus productos!</p>
     <p>Encontrarás las claves de tus juegos digitales en tu Biblioteca y la fecha de entrega de los físicos en tus Pedidos</p>
