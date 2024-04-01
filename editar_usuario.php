@@ -5,11 +5,11 @@ if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
 
-if (!isset($_POST['id_usuario']) || empty($_POST['id_usuario'])) {
+if (!isset($_COOKIE['id']) || empty($_COOKIE['id'])) {
     die("No se proporcionó el ID del usuario.");
 }
 
-$id_usuario = $_POST['id_usuario'];
+$id_usuario = $_COOKIE['id'];
 
 $consulta = $conexion->prepare("SELECT * FROM usuario WHERE id_usuario = ?");
 $consulta->bind_param("i", $id_usuario);
@@ -36,7 +36,17 @@ $usuario = $resultado->fetch_assoc();
     </head>
 
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        
+
+        <?php
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            if ($error == "AntiguaIncorrecta") {
+                echo "La contraseña antigua no es correcta.";
+            } else if ($error == "NoCoinciden") {
+                echo "La nueva contraseña y su confirmación no coinciden.";
+            }
+        }
+        ?>
         <form action="procesar_edicion_usuario.php" method="post">
         <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($usuario['id_usuario']); ?>">
         Alias: <input type="text" name="alias" value="<?php echo htmlspecialchars($usuario['alias']); ?>"><br>

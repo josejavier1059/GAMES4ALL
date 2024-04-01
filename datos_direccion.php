@@ -11,7 +11,7 @@
     </head>
 
     <body style="background-color: #4CC5B0; text-align: center; color: #000000;">
-        <div style="float: left; width: 30%; height: 400px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
+        <div style="float: left; width: 30%; height: 500px;margin-top: -60px; background-color: #173E59; color: #ffffff;font-size: 25px;">
          <?php
 $conexion = new mysqli("localhost", "root", "", "games4all");
 
@@ -66,7 +66,7 @@ $fila = $resultado->fetch_assoc();
 
 ?>
 <h2>Datos Dirección</h2>
-<form action='gestionar_perfil.php' method='post'>
+<form action='datos_direccion.php' method='post'>
     <label for='pais'>País:</label>
     <input type='text' id='pais' name='pais' required value="<?php echo htmlspecialchars($fila['pais']); ?>"><br><br>
     <label for='ciudad'>Ciudad:</label>

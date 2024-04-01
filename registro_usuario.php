@@ -37,7 +37,7 @@
                 <input type="text" name="direccion" id="direccion" placeholder="Direccion" required>
                 <br><br>
                 Codigo postal: 
-                <input type="text" name="cod_postal" id="cod_postal" placeholder="Codigo postal" required>
+                <input type="text" name="cod_postal" id="cod_postal" placeholder="Codigo postal" required pattern="[0-9]{5}" title="Debe contener exactamente 5 dígitos">
                 <br><br><br>
                 <input type="submit" value="Confirmar">
             </form>

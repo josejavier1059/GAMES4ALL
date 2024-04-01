@@ -20,9 +20,9 @@
         if(isset($_GET["logout"]) && $_GET["logout"] === "true") {   //Con este bloque comprobamos si el usuario a cerrado sesion
             setcookie("alias", "", time() - 1, "/");                   // en caso que si, se eliminan las cookies estableciendo un 
             setcookie("password", "", time() - 1, "/");                // tiempo de expiracion negativo
-            setcookie("id", $id, time() - 1, "/");
-            setcookie("rol", $roles, time() - 1, "/");
-            setcookie("correo", $email, time() - 1, "/");
+            setcookie("id", "", time() - 1, "/");
+            setcookie("rol", "", time() - 1, "/");
+            setcookie("correo", "", time() - 1, "/");
                             
             exit();
             

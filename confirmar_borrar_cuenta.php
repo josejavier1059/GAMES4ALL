@@ -25,6 +25,12 @@
             <?php  
                 if($conexion){    
                     if(mysqli_query($conexion, "DELETE FROM usuario WHERE alias = '$alias'")){
+
+                        foreach ($_COOKIE as $key => $value) {
+                            setcookie($key, '', time() - 3600, '/');
+                        }
+                        $_COOKIE = array();
+
                         echo '¡Usuario eliminado con éxito!';
                         header("refresh:3;url=index.php?logout=true");          
                     }
