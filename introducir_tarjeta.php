@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
     
-<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;margin-top: 250px;background-color: #4CC5B0; text-align: center; color: #000000;">
+<body style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;margin-top: 200px;background-color: #4CC5B0; text-align: center; color: #000000;">
     <div style="background: url('fondo1.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: center; color: #000000;">
-        <h1>Introducir Tarjeta</h1>
-        <h2>Introduce los detalles de tu tarjeta:</h2>
+        <h1>Selecciona Tarjeta:</h1>
+
         <?php
         $conexion = new mysqli("localhost", "root", "", "games4all");
 
@@ -50,7 +50,8 @@
             $nombre_titular_seleccionado = $tarjeta_seleccionada["titular"];
             $fecha_expiracion_seleccionada = date("m/y", strtotime($tarjeta_seleccionada["caducidad"]));
 
-        } else if (isset($_POST["numero_tarjeta"]) && isset($_POST["nombre_titular"]) && isset($_POST["fecha_expiracion"]) && isset($_POST["cvv"])){
+        } 
+        else if (isset($_POST["numero_tarjeta"]) && isset($_POST["nombre_titular"]) && isset($_POST["fecha_expiracion"]) && isset($_POST["cvv"])){
             $numero_tarjeta = $_POST["numero_tarjeta"];
             $nombre_titular = $_POST["nombre_titular"];
             $fecha_expiracion = $_POST["fecha_expiracion"];
@@ -115,13 +116,14 @@
         </form>
 
         <br>
+        <h2>O introduce una nueva tarjeta:</h2>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             Número de Tarjeta (16 dígitos): <input type="text" name="numero_tarjeta" value="<?php echo isset($numero_tarjeta_seleccionada) ? $numero_tarjeta_seleccionada : ''; ?>" required pattern="\d{16}" required><br><br>
             Nombre del Titular: <input type="text" name="nombre_titular" value="<?php echo isset($nombre_titular_seleccionado) ? $nombre_titular_seleccionado : ''; ?>" required><br><br>
             Fecha de Expiración(MM/YY): <input type="text" name="fecha_expiracion" value="<?php echo isset($fecha_expiracion_seleccionada) ? $fecha_expiracion_seleccionada : ''; ?>" placeholder="MM/YY" required pattern="\d{2}\/\d{2}"><br><br>
             CVV (3 dígitos): <input type="text" name="cvv" required pattern="\d{3}"><br><br>
-            <input type="submit" value="Introducir Tarjeta">
+            <input type="submit" value="Confirmar tarjeta">
         </form>
 
         <form action="ver_carrito.php" method="post">

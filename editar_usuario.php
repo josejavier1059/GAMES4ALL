@@ -49,14 +49,21 @@ $usuario = $resultado->fetch_assoc();
         ?>
         <form action="procesar_edicion_usuario.php" method="post">
         <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($usuario['id_usuario']); ?>">
-        Alias: <input type="text" name="alias" value="<?php echo htmlspecialchars($usuario['alias']); ?>"><br>
-        Contraseña Antigua: <input type="password" name="password_antigua"><br>
-        Nueva Contraseña: <input type="password" name="password_nueva"><br>
-        Confirmar Nueva Contraseña: <input type="password" name="password_confirmacion"><br>
-        Correo: <input type="email" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>"><br>
-        Nombre Completo: <input type="text" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>"><br>
+        Alias: <input type="text" name="alias" value="<?php echo htmlspecialchars($usuario['alias']); ?>"required><br>
+        Contraseña Antigua: <input type="password" name="password_antigua"required><br>
+        Nueva Contraseña: <input type="password" name="password_nueva"required><br>
+        Confirmar Nueva Contraseña: <input type="password" name="password_confirmacion"required><br>
+        <?php 
+    // Verificar si las contraseñas coinciden
+    if(isset($_POST['password_nueva']) && isset($_POST['password_confirmacion']) && $_POST['password_nueva'] == $_POST['password_confirmacion']){
+        // Contraseñas coinciden, agregar campo oculto con la contraseña nueva
+        echo "<input type='hidden' name='password_nueva_confirmada' value='" . htmlspecialchars($_POST['password_nueva']) . "'>";
+    }
+    ?>
+        Correo: <input type="email" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>"required><br>
+        Nombre Completo: <input type="text" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>"required><br>
         <input type="submit" value="Guardar cambios">
-</form>
+        </form>
 
 	<form method="POST" action="gestionar_perfil.php">
                 <input type="submit" value="Volver">

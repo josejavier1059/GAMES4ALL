@@ -55,7 +55,7 @@ $resultado_descuentos = $conexion->query($sql_descuentos);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resumen de Compra</title>
 </head>
-<body>
+<body style="background: url('fondo.png') no-repeat center center fixed; background-size: cover;background-color: #4CC5B0; text-align: left; color: #000000;">
     <h2>Resumen de Compra</h2>
 
     <h3>Juegos en el Carrito:</h3>
