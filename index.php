@@ -45,8 +45,6 @@
             $conexion->close();
             exit();
         }
-        $alias = $_COOKIE['alias'];
-        echo "$alias";
         ?>
         <form method="POST" action="login.php">
             <input type="submit" name="Acceso" value="Acceso">
