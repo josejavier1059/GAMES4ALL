@@ -19,7 +19,7 @@ if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
 }
 
-$id_usuario = $_POST['id_usuario'];
+$id_usuario = $_COOKIE['id'];
 $alias = $_POST['alias'];
 $correo = $_POST['correo'];
 $passwordAntigua = $_POST['password_antigua'];
@@ -34,13 +34,13 @@ $resultado = $consulta->get_result();
 $usuario = $resultado->fetch_assoc();
 
 if ($usuario['password'] !== $passwordAntigua) {
-    die("La contraseña antigua no es correcta.");
-    header("refresh:3;url=editar_usuario.php");
+    header("Location: editar_usuario.php?error=AntiguaIncorrecta");
+    exit();
 }
 
 if ($passwordNueva !== $passwordConfirmacion) {
-    die("La nueva contraseña y su confirmación no coinciden.");
-    header("refresh:3;url=editar_usuario.php");
+    header("Location: editar_usuario.php?error=NoCoinciden");
+    exit();
 }
 
 if (!empty($passwordNueva)) {

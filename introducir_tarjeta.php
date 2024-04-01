@@ -119,7 +119,7 @@
         <h2>O introduce una nueva tarjeta:</h2>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            Número de Tarjeta (16 dígitos): <input type="text" name="numero_tarjeta" value="<?php echo isset($numero_tarjeta_seleccionada) ? $numero_tarjeta_seleccionada : ''; ?>" required pattern="\d{16}" required><br><br>
+            Número de Tarjeta (16 dígitos): <input type="text" name="numero_tarjeta" value="<?php echo isset($numero_tarjeta_seleccionada) ? $numero_tarjeta_seleccionada : ''; ?>" required pattern="\d{16}"><br><br>
             Nombre del Titular: <input type="text" name="nombre_titular" value="<?php echo isset($nombre_titular_seleccionado) ? $nombre_titular_seleccionado : ''; ?>" required><br><br>
             Fecha de Expiración(MM/YY): <input type="text" name="fecha_expiracion" value="<?php echo isset($fecha_expiracion_seleccionada) ? $fecha_expiracion_seleccionada : ''; ?>" placeholder="MM/YY" required pattern="\d{2}\/\d{2}"><br><br>
             CVV (3 dígitos): <input type="text" name="cvv" required pattern="\d{3}"><br><br>

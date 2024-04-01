@@ -1,18 +1,25 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['id_usuario'])){
+        $conexion = new mysqli("localhost", "root", "", "games4all");
+
         $id_usuario = $_POST['id_usuario'];
         $alias_user = $_POST['alias'];
         $password = $_POST['password_nueva'];
+        if ($password == "") {
+            $consulta = $conexion->prepare("SELECT password FROM usuario WHERE id_usuario = ?");
+            $consulta->bind_param("i", $id_usuario);
+            $consulta->execute();
+            $resultado = $consulta->get_result();
+            $usuario = $resultado->fetch_assoc();
+            $password = $usuario['password'];
+        }
         $email = $_POST['correo'];
         $nombre = $_POST['nombre'];
         $pais = $_POST['pais'];
         $ciudad = $_POST['ciudad'];
         $direccion = $_POST['direccion'];
         $cod_postal = $_POST['cod_postal'];
-
-
-        $conexion = new mysqli("localhost", "root", "", "games4all");
 
         if ($conexion->connect_error) {
             die("Error de conexión: " . $conexion->connect_error);

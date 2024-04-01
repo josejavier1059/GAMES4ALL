@@ -15,16 +15,6 @@ if ($rol !== 'administrador') {
     exit();
 }
 
-if (isset($_GET['error'])) {
-    $error = $_GET['error'];
-    if ($error == 'FechaError') {
-        echo 'La tarjeta está caducada o la fecha no es válida.';
-    }
-    if ($error == 'TarjetaYaExiste') {
-        echo 'La tarjeta ya existe en la base de datos.';
-    }
-}
-
 if (isset($_GET['id_tarjeta'])) {
     $id_tarjeta = mysqli_real_escape_string($conexion, $_GET['id_tarjeta']);
     
@@ -39,7 +29,7 @@ if (isset($_GET['id_tarjeta'])) {
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 if ($row['id_tarjeta'] != $id_tarjeta) {
-                    header("Location: editar_tarjeta.php?id_tarjeta=" . $id_tarjeta . "&?error=TarjetaYaExiste");
+                    header("Location: editar_tarjeta.php?id_tarjeta=$id_tarjeta&error=TarjetaYaExiste");
                     exit();
                 }
             }
@@ -49,7 +39,7 @@ if (isset($_GET['id_tarjeta'])) {
         $fecha_actual = date("Y-m-d");
             
         if (strtotime($caducidad) < strtotime($fecha_actual)) {
-            header("Location: editar_tarjeta.php?id_tarjeta=" . $id_tarjeta . "&?error=FechaError");
+            header("Location: editar_tarjeta.php?id_tarjeta=$id_tarjeta&error=FechaError");
             exit();
         }
 
@@ -137,9 +127,23 @@ if (isset($_GET['id_tarjeta'])) {
 </head>
         <body style="background-color: #4CC5B0; color: #000000;">
 
+            <?php
+
+            if (isset($_GET['error'])) {
+                $error = $_GET['error'];
+                if ($error == "FechaError") {
+                    echo "<p style='color: red;'>*ERROR: La tarjeta está caducada o la fecha no es válida.</p>";
+                }
+                if ($error == "TarjetaYaExiste") {
+                    echo "<p style='color: red;'>*ERROR: La tarjeta ya existe.</p>";
+                }
+            }
+
+            ?>
+
             <form action="" method="post">
                 <label for="numero">Número de Tarjeta:</label><br>
-                <input type="text" id="numero" name="numero" value="<?php echo htmlspecialchars($fila['numero']); ?>" required><br>
+                <input type="text" id="numero" name="numero" value="<?php echo htmlspecialchars($fila['numero']); ?>" required pattern="\d{16}"><br>
 
                 <label for="titular">Titular:</label><br>
                 <input type="text" id="titular" name="titular" value="<?php echo htmlspecialchars($fila['titular']); ?>" required><br>

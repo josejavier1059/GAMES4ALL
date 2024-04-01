@@ -54,8 +54,8 @@
         <form action="admin_edita_usuariook.php" method="post">
         <input type="hidden" name="id_usuario" value="<?php echo htmlspecialchars($usuario['id_usuario']); ?>">
         Alias: <input type="text" name="alias" value="<?php echo htmlspecialchars($usuario['alias']); ?>"required><br>
-        Nueva Contraseña: <input type="password" name="password_nueva"required><br>
-        Confirmar Nueva Contraseña: <input type="password" name="password_confirmacion"required><br>
+        Nueva Contraseña: <input type="password" name="password_nueva"><br>
+        Confirmar Nueva Contraseña: <input type="password" name="password_confirmacion"><br>
         <?php 
     // Verificar si las contraseñas coinciden
     if(isset($_POST['password_nueva']) && isset($_POST['password_confirmacion']) && $_POST['password_nueva'] == $_POST['password_confirmacion']){
@@ -68,7 +68,7 @@
         Pais: <input type="text" name="pais" value="<?php echo htmlspecialchars($usuario['pais']); ?>"required><br>
         Ciudad: <input type="text" name="ciudad" value="<?php echo htmlspecialchars($usuario['ciudad']); ?>"required><br>
         Calle: <input type="text" name="direccion" value="<?php echo htmlspecialchars($usuario['direccion']); ?>"required><br>
-        Codigo postal: <input type="text" name="cod_postal" value="<?php echo htmlspecialchars($usuario['cod_postal']); ?>"required><br><br>
+        Codigo postal: <input type="text" name="cod_postal" required pattern="[0-9]{5}" title="Debe contener exactamente 5 dígitos" value="<?php echo htmlspecialchars($usuario['cod_postal']); ?>"required><br><br>
         <input type="submit" value="Guardar cambios">
         </form>
 
