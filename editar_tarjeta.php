@@ -15,12 +15,12 @@ if ($rol !== 'administrador') {
     exit();
 }
 
-if (isset($_GET['error'])) {
-    $error = $_GET['error'];
-    if ($error == 'FechaError') {
+if (isset($_GET["error"])) {
+    $error = $_GET["error"];
+    if ($error == "FechaError") {
         echo 'La tarjeta está caducada o la fecha no es válida.';
     }
-    if ($error == 'TarjetaYaExiste') {
+    if ($error == "TarjetaYaExiste") {
         echo 'La tarjeta ya existe en la base de datos.';
     }
 }
@@ -139,7 +139,7 @@ if (isset($_GET['id_tarjeta'])) {
 
             <form action="" method="post">
                 <label for="numero">Número de Tarjeta:</label><br>
-                <input type="text" id="numero" name="numero" value="<?php echo htmlspecialchars($fila['numero']); ?>" required><br>
+                <input type="text" id="numero" name="numero" value="<?php echo htmlspecialchars($fila['numero']); ?>" required pattern="\d{16}"><br>
 
                 <label for="titular">Titular:</label><br>
                 <input type="text" id="titular" name="titular" value="<?php echo htmlspecialchars($fila['titular']); ?>" required><br>

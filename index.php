@@ -42,8 +42,6 @@
                 setcookie($name, '', time()-1,"/"); // Establece la fecha de expiración en el pasado (elimina la cookie)
                 }
             }
-            $conexion->close();
-            exit();
         }
         ?>
         <form method="POST" action="login.php">

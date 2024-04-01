@@ -38,7 +38,8 @@
                         echo 'Se ha producido un error, no se ha podido eliminar su cuenta.';
                         header("refresh:3;url=gestionar_perfil.php");  
                     }
-                }    
+                }
+                $conexion->close();    
             ?>          
             
 

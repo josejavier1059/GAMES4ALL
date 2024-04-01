@@ -93,6 +93,25 @@ if ($rol !== 'administrador') {
     <h4>Introduce un nuevo juego o revisa la información existente</h4>
 </div>
 
+<?php
+
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+    if ($error === 'faltanDatosInfo') {
+        echo "<p style='color: red;'>*ERROR: Debe proporcionar la descripción, género e imagen para un juego nuevo</p>";
+    } else if ($error === 'errorAlIntoducirInfo') {
+        echo "<p style='color: red;'>*ERROR: No se ha podido introducir la información del juego</p>";
+    } else if ($error === 'errorAlActualizarInfo') {
+        echo "<p style='color: red;'>*ERROR: No se ha podido actualizar la información del juego</p>";
+    } else if ($error === 'juegoYaExistente') {
+        echo "<p style='color: red;'>*ERROR: Ya existe un juego con esa plataforma y formato</p>";
+    } else if ($error === 'errorAlIntroducirJuego') {
+        echo "<p style='color: red;'>*ERROR: No se ha podido introducir el juego</p>";
+    }
+}
+
+?>
+
 <form method="POST" action="gestionar_videojuegos.php">
     <input type="submit" value="Volver">
 </form>
@@ -140,7 +159,7 @@ if ($rol !== 'administrador') {
     <input type="text" name="titulo" required placeholder="Título del juego">
     <input type="number" min="0" step="0.01" name="precio" required placeholder="Precio">
     <input type="number" min="0" max="100" step="1" name="rebaja" required placeholder="Rebaja">
-    <input type="number" name="stock" required placeholder="Stock">
+    <input type="number" min="0" step="1" name="stock" required placeholder="Stock">
     <input type="number" name="formato" min="0" max="1" step="1" required placeholder="F0/D1">
     <input type="text" name="genero" placeholder="Género (*Nota)">
     <textarea name="descripcion" placeholder="Descripción (*Nota)" cols="100" rows="5" style="resize: none;"></textarea>
