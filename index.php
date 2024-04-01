@@ -17,7 +17,8 @@
         <br>
 
         <?php
-        if(isset($_GET["logout"]) && $_GET["logout"] === "true") {   //Con este bloque comprobamos si el usuario a cerrado sesion
+        /*
+        if(isset($_GET["logout"]) && $_GET["logout"] === "true") {     //Con este bloque comprobamos si el usuario a cerrado sesion
             setcookie("alias", "", time() - 1, "/");                   // en caso que si, se eliminan las cookies estableciendo un 
             setcookie("password", "", time() - 1, "/");                // tiempo de expiracion negativo
             setcookie("id", $id, time() - 1, "/");
@@ -29,19 +30,23 @@
             $conexion->close();
 
         }
-
-        /*
-        // Eliminar todas las cookies establecidas a la vez
-        if (isset($_SERVER['HTTP_COOKIE'])) {
-            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-            foreach($cookies as $cookie) {
-            $parts = explode('=', $cookie);
-            $name = trim($parts[0]);
-            setcookie($name, '', time()-3600); // Establece la fecha de expiración en el pasado (elimina la cookie)
-            }
-        }
-
         */
+        
+        // Eliminar todas las cookies establecidas a la vez
+        if(isset($_GET["logout"]) && $_GET["logout"] === "true") {      //Con este bloque comprobamos si el usuario a cerrado sesion
+            if (isset($_SERVER['HTTP_COOKIE'])) {                       // en caso que si, se eliminan las cookies estableciendo un 
+                $cookies = explode(';', $_SERVER['HTTP_COOKIE']);       // tiempo de expiracion negativo
+                foreach($cookies as $cookie) {
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                setcookie($name, '', time()-1,"/"); // Establece la fecha de expiración en el pasado (elimina la cookie)
+                }
+            }
+            $conexion->close();
+            exit();
+        }
+        $alias = $_COOKIE['alias'];
+        echo "$alias";
         ?>
         <form method="POST" action="login.php">
             <input type="submit" name="Acceso" value="Acceso">
