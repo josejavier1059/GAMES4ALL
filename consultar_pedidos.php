@@ -11,6 +11,7 @@
     }
 
     $alias = $_COOKIE['alias'];
+    $id_usuario = $_COOKIE['id'];
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +55,7 @@
             </tr>
 
             <?php 
-            $sql = "SELECT p.id_pedido, u.alias, t.numero, IFNULL(p.descuento, 0) as descuento, p.subtotal FROM pedido p JOIN usuario u ON p.id_usuario = u.id_usuario JOIN tarjeta t ON p.id_tarjeta = t.id_tarjeta";
+            $sql = "SELECT p.id_pedido, u.alias, t.numero, IFNULL(p.descuento, 0) as descuento, p.subtotal FROM pedido p JOIN usuario u ON p.id_usuario = u.id_usuario JOIN tarjeta t ON p.id_tarjeta = t.id_tarjeta WHERE u.id_usuario = $id_usuario";
             $resultado = $conexion->query($sql);
 
             while ($fila = $resultado->fetch_assoc()) {
@@ -67,6 +68,7 @@
                     <a href='detalles_pedido.php?id=" . $fila['id_pedido'] . "'>Detalles</a>
                 </td>
               </tr>";
+             
             }
 
             $conexion->close();
