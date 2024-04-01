@@ -35,10 +35,12 @@ $usuario = $resultado->fetch_assoc();
 
 if ($usuario['password'] !== $passwordAntigua) {
     die("La contraseña antigua no es correcta.");
+    header("refresh:3;url=editar_usuario.php");
 }
 
 if ($passwordNueva !== $passwordConfirmacion) {
     die("La nueva contraseña y su confirmación no coinciden.");
+    header("refresh:3;url=editar_usuario.php");
 }
 
 if (!empty($passwordNueva)) {
